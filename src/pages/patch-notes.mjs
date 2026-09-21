@@ -2,6 +2,8 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
+  "> Short answer: Dressmaker's public update history runs from the first itch.io prototype patch on **August 4, 2025** to the **September 21, 2026** Steam launch. The prototype numbered its builds 0.4.1 through 0.5.5; **no version number has been published for the Steam build**, and no post-launch patch had appeared on launch day.",
+  "",
   "Dressmaker has a longer public paper trail than most cozy games its size. Its first patch note appeared on August 4, 2025, five numbered prototype patches followed within two months, the builds then went quiet for half a year, and the full game reached Steam on September 21, 2026. This page records all of it for the [dressmaker game](/), newest first.",
   "Two caveats. This log is kept by hand by a fan site, not by the developers, and the official [Steam news hub](@LINK_news@) is authoritative — where the two disagree, Steam is right. And as of September 21, 2026 there is no post-launch patch: the only thing Steam carries from launch day is the launch announcement.",
   "## Dressmaker update history at a glance",
@@ -26,7 +28,7 @@ const BODY = [
   "### April 15, 2026 — April Tea: the full game stops looking like the prototype",
   "The first substantial look at the built-from-scratch version. Characters are measured and the mannequin adjusted to fit, with pattern pieces drafted to match. New shaders give silk and velvet different kinds of shine, and the fabric shop was rebuilt to feel like a haberdashery rather than a grid of buttons. The itch.io edition landed on April 17, 2026. Source: the [Steam news hub](@LINK_news@).",
   "## Prototype era: the 2025 patch run",
-  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@)",
+  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@ Hand the dress in, keep working on it, or sell it instead of delivering the commission.)",
   "Everything below is a build update for the free prototype, numbered with its own scheme. The newest files on the [itch.io page](@LINK_itch@) are still labelled 0.5.5, so nothing here has been replaced by a later prototype build.",
   "### November 11, 2025 — \"We've gone quiet!\"",
   "The last post of the prototype era, and there is no patch in it. sarandipityx explained that updates had stopped while the team worked on the full game, and asked readers to wishlist the Steam page. The silence lasted until April 2026. Source: [itch.io devlog](@LINK_devlog@).",
@@ -64,9 +66,24 @@ export const page = {
   title: 'Dressmaker Patch Notes & Update History',
   description: 'Dressmaker patch notes and update history: every prototype hotfix from 0.4.1 to 0.5.5, plus the dated road to the September 2026 Steam launch.',
   h1: 'Dressmaker Patch Notes and Update History',
+  eyebrow: "Update history",
+  lede: "Dressmaker has a longer public paper trail than most cozy games its size. Its first patch note appeared on August 4, 2025, five numbered prototype patches followed within two months, the builds then went quiet for half a year, and the full game reached Steam on September 21, 2026. This page records all of it for the dressmaker game, newest first.",
+  facts: [
+    ['First public patch', "August 4, 2025"],
+    ['Steam launch', "September 21, 2026"],
+    ['Prototype builds', "0.4.1 through 0.5.5"],
+    ['Steam build version', "Not published"],
+    ['Post-launch patch', "None on launch day"],
+    ['Next content', "Fixes, fabrics, accessories, challenge mode"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
   crumbs: [{ name: 'Home', url: '/' }, { name: 'Patch Notes', url: '/patch-notes' }],
+  sources: [
+    ['Official Steam announcements', LINKS.steamNews],
+    ['Official itch.io devlog', LINKS.itchDevlog],
+    ['itch.io prototype page', LINKS.itch],
+  ],
   body: BODY,
 };

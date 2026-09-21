@@ -2,7 +2,9 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
-  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@)",
+  "> Short answer: Dressmaker needs very little: on Windows, **Windows 10 or later, an Intel Core i5 or AMD Ryzen, 8 GB RAM, Intel UHD 630 graphics or better, DirectX 11 and 1 GB of storage**; on Mac, an **Apple M1 with 8 GB RAM and 1 GB of storage**. Steam publishes a minimum tier only — there is no recommended specification and no Steam Linux build.",
+  "",
+  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ Hand-in is the moment the whole commission was for: the customer reacts in her own words.)",
   "",
   "Dressmaker is a small game, and the official specs say so. [Steam](@LINK_steam@) asks for **Windows 10 or later**, an **Intel Core i5 or AMD Ryzen** processor, **8 GB of RAM**, **Intel UHD 630 or better** graphics and **DirectX 11**. On Mac it asks for an **Apple M1** and **8 GB of RAM**. Both platforms need **1 GB of free storage**.",
   "",
@@ -105,9 +107,23 @@ export const page = {
   title: 'Dressmaker System Requirements: PC & Mac Specs',
   description: 'Dressmaker system requirements for PC and Mac, copied verbatim from Steam: OS, CPU, RAM, graphics and storage, plus a plain-English will-it-run check.',
   h1: 'Dressmaker System Requirements',
+  eyebrow: "PC and Mac specs",
+  lede: "Dressmaker is a small game, and the official specs say so. Steam asks for Windows 10 or later, an Intel Core i5 or AMD Ryzen processor, 8 GB of RAM, Intel UHD 630 or better graphics and DirectX 11. On Mac it asks for an Apple M1 and 8 GB of RAM. Both platforms need 1 GB of free storage.",
+  facts: [
+    ['Windows', "10 or later"],
+    ['Processor', "Intel Core i5 or AMD Ryzen"],
+    ['Memory', "8 GB RAM"],
+    ['Graphics', "Intel UHD 630 or better"],
+    ['macOS', "Apple M1 minimum"],
+    ['Storage', "1 GB available space"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
   crumbs: [{ name: 'Home', url: '/' }, { name: 'System Requirements', url: '/system-requirements' }],
+  sources: [
+    ['Dressmaker on Steam (published requirements)', LINKS.steam],
+    ['SteamDB app 4019220 (depot and download sizes)', LINKS.steamDb],
+  ],
   body: BODY,
 };

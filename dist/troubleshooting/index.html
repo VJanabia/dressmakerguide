@@ -19,6 +19,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/styles.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter.woff2" crossorigin>
 <link rel="preload" as="image" href="/assets/shots/shot5.webp" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Dressmaker support Steam Cloud?","acceptedAnswer":{"@type":"Answer","text":"Yes, Steam Cloud is listed among the game's Steam features. The developers have not published which files sync, so treat it as a safety net rather than a backup and keep your own copy of anything you would hate to lose."}},{"@type":"Question","name":"Can I undo a cut in Dressmaker?","acceptedAnswer":{"@type":"Answer","text":"No. Cutting is irreversible by design and there is no undo. Practice on cheap cotton and check the mannequin preview before every cut."}},{"@type":"Question","name":"Why does macOS say the prototype may be malicious?","acceptedAnswer":{"@type":"Answer","text":"Because the itch.io prototype is not notarized, so macOS cannot verify the developer. The official fix is System Settings, Privacy & Security, then Open Anyway."}},{"@type":"Question","name":"Where do I report a Dressmaker bug?","acceptedAnswer":{"@type":"Answer","text":"In the official Steam discussions or the developers' Discord, with your build, platform, exact steps and a screenshot."}},{"@type":"Question","name":"Why will my antivirus not let Dressmaker run?","acceptedAnswer":{"@type":"Answer","text":"Heuristic scanners sometimes quarantine files from small studios. Check your protection history, restore anything belonging to the game and exclude your Steam library."}}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dressmakerguide.com/"},{"@type":"ListItem","position":2,"name":"Troubleshooting","item":"https://dressmakerguide.com/troubleshooting/"}]}]}</script>
 </head>
@@ -26,15 +28,23 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
 <div class="wrap">
-<a class="brand" href="/"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="#9c3d5f" d="M16 2.5 7 9.5v4.2l9-3.4 9 3.4V9.5z"/><path fill="none" stroke="#c2708f" stroke-width="2" stroke-dasharray="3 3" d="M4 20h24"/><path fill="#e8b7c8" d="M8 22h16l3 7H5z"/></svg><span>Dressmaker Guide<small>Fan guide</small></span></a>
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" fill="#7d2b4a"/><path fill="#fff" d="M16 5.5 9.5 10v3.4l6.5-2.5 6.5 2.5V10z"/><path fill="none" stroke="#f0c3d3" stroke-width="1.6" stroke-dasharray="2.4 2.4" stroke-linecap="round" d="M6 20.5h20"/><path fill="#f0c3d3" d="M9.5 23h13l2.2 4.5H7.3z"/></svg><span>Dressmaker Guide<small>Fan guide</small></span></a>
 <nav class="site-nav" aria-label="Main"><a class="nav-link" href="/how-to-play">How to Play</a><a class="nav-link" href="/sewing-tips">Sewing Tips</a><a class="nav-link" href="/customers">Customers</a><a class="nav-link" href="/wiki">Wiki</a><a class="nav-link" href="/release-date">Release</a><a class="nav-link" href="/demo">Demo</a><a class="nav-link" href="/patch-notes">Patch Notes</a><a class="nav-link" href="/games-like">Games Like It</a></nav>
 </div>
 </header>
 <nav class="crumbs wrap" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><span aria-current="page">Troubleshooting</span></li></ol></nav>
 <main id="main">
-<div class="wrap prose">
+<div class="wrap">
+<header class="page-head">
+<p class="eyebrow">Fixes</p>
 <h1>Dressmaker Troubleshooting</h1>
-<p class="updated">Last updated <time datetime="2026-09-21">September 21, 2026</time>. Dressmaker is a fan-made guide and is not affiliated with the developers.</p>
+<p class="lede">Dressmaker is a small, well-behaved game, so when something breaks it is usually Steam, a driver, macOS Gatekeeper or your network.</p>
+<p class="updated"><time datetime="2026-09-21">Reviewed September 21, 2026</time></p>
+</header>
+<ul class="facts"><li><span class="k">Most common</span><span class="v">Out-of-date GPU drivers</span></li><li><span class="k">macOS</span><span class="v">Gatekeeper blocks the itch.io prototype</span></li><li><span class="k">Stutter</span><span class="v">Background apps, drivers, thermals</span></li><li><span class="k">itch.io</span><span class="v">Zips are 115–128 MB, check the download</span></li><li><span class="k">Saves</span><span class="v">Steam Cloud is listed; back up anyway</span></li><li><span class="k">Bugs</span><span class="v">Official Steam discussions</span></li></ul>
+<div class="layout has-toc">
+<article class="prose">
+<aside class="answer"><p>Most Dressmaker problems are one of five things: an out-of-date GPU driver, the macOS Gatekeeper warning on the un-notarised itch.io prototype, a partially downloaded file, a laptop thermally throttling, or a network blocking itch.io. Work through those in order before assuming the game is broken, and report real bugs on the official Steam discussions.</p></aside>
 <p>Dressmaker is a small, well-behaved game, so when something breaks it is usually Steam, a driver, macOS Gatekeeper or your network. The paid Steam release and the free itch.io prototype are different builds, so a fix for one may not apply to the other. The <a href="/">dressmaker game</a> home page covers the difference.</p>
 <h2 id="1-dressmaker-will-not-start-on-windows">1. Dressmaker will not start on Windows</h2>
 <p>You press Play, the button says running, and nothing appears.</p>
@@ -70,7 +80,7 @@
 <p>The Steam release is a normal Steam install for Apple Silicon, with a published minimum of Apple M1. If it will not open, verify the files in Steam first.</p>
 <h2 id="4-the-itchio-download-will-not-unzip">4. The itch.io download will not unzip</h2>
 <h3 id="match-the-file-name-and-size">Match the file name and size</h3>
-<div class="table-wrap"><table><thead><tr><th scope="col">File</th><th scope="col">Platform</th><th scope="col">Size (version 0.5.5)</th></tr></thead><tbody><tr><th scope="row">Dressmaker Prototype Windows 0.5.5.zip</th><td>Windows</td><td>115 MB</td></tr><tr><th scope="row">Dressmaker Prototype Linux 0.5.5.zip</th><td>Linux</td><td>127 MB</td></tr><tr><th scope="row">Dressmaker Prototype OSX 0.5.5.zip</th><td>macOS</td><td>128 MB</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">File</th><th scope="col">Platform</th><th scope="col">Size (version 0.5.5)</th></tr></thead><tbody><tr><th scope="row">Dressmaker Prototype Windows 0.5.5.zip</th><td data-label="Platform">Windows</td><td data-label="Size (version 0.5.5)">115 MB</td></tr><tr><th scope="row">Dressmaker Prototype Linux 0.5.5.zip</th><td data-label="Platform">Linux</td><td data-label="Size (version 0.5.5)">127 MB</td></tr><tr><th scope="row">Dressmaker Prototype OSX 0.5.5.zip</th><td data-label="Platform">macOS</td><td data-label="Size (version 0.5.5)">128 MB</td></tr></tbody></table></div>
 <p>If your download is much smaller than the size listed, it stopped early. Download it again.</p>
 <h3 id="use-a-real-unzip-tool">Use a real unzip tool</h3>
 <p>Windows Explorer and the macOS Archive Utility open these files, but they fail most often on a big download. Try 7-Zip or The Unarchiver instead.</p>
@@ -89,7 +99,7 @@
 <p>Steam shows where the game lives: right-click Dressmaker in your Library, then Manage → Browse local files, and look for a saves folder inside or beside it. Steam also keeps per-game data under userdata, your account ID, then App ID 4019220.</p>
 <aside class="note warn"><p>Warning: we have not verified a save path, so copy the whole folder rather than single files.</p></aside>
 <h2 id="7-you-cut-the-wrong-fabric">7. You cut the wrong fabric</h2>
-<p><img src="/assets/shots/shot5.webp" alt="Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth" loading="lazy" decoding="async" width="600" height="337"></p>
+<figure><img src="/assets/shots/shot5.webp" alt="Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth" loading="lazy" decoding="async" width="1100" height="619"><figcaption>Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.</figcaption></figure>
 <h3 id="cutting-is-permanent-by-design">Cutting is permanent by design</h3>
 <p>There is no undo, and no way to lift a pattern piece off the cloth once the shears have gone through it. How you cut your fabric is what appears on the finished dress.</p>
 <h3 id="practice-on-cheap-fabric">Practice on cheap fabric</h3>
@@ -102,16 +112,11 @@
 <p>Work down this ladder and stop as soon as the problem is solved:</p>
 <ol><li>Restart Steam and verify the game files.</li><li>Update your OS and graphics driver.</li><li>Work through the matching section above.</li><li>Check the <a href="/patch-notes">Dressmaker patch notes</a> for a hotfix.</li><li>Report it on the Steam discussions or the Discord.</li><li>Still stuck? <a href="/contact">Tell us</a>.</li></ol>
 <h2 id="frequently-asked-questions">Frequently asked questions</h2>
-<h3 id="does-dressmaker-support-steam-cloud">Does Dressmaker support Steam Cloud?</h3>
-<p>Yes, Steam Cloud is listed among the game's Steam features. The developers have not published which files sync, so treat it as a safety net rather than a backup and keep your own copy of anything you would hate to lose.</p>
-<h3 id="can-i-undo-a-cut-in-dressmaker">Can I undo a cut in Dressmaker?</h3>
-<p>No. Cutting is irreversible by design and there is no undo. Practice on cheap cotton and check the mannequin preview before every cut.</p>
-<h3 id="why-does-macos-say-the-prototype-may-be-malicious">Why does macOS say the prototype may be malicious?</h3>
-<p>Because the itch.io prototype is not notarized, so macOS cannot verify the developer. The official fix is System Settings, Privacy &amp; Security, then Open Anyway.</p>
-<h3 id="where-do-i-report-a-dressmaker-bug">Where do I report a Dressmaker bug?</h3>
-<p>In the official Steam discussions or the developers' Discord, with your build, platform, exact steps and a screenshot.</p>
-<h3 id="why-will-my-antivirus-not-let-dressmaker-run">Why will my antivirus not let Dressmaker run?</h3>
-<p>Heuristic scanners sometimes quarantine files from small studios. Check your protection history, restore anything belonging to the game and exclude your Steam library.</p>
+<ol class="faq"><li><h3 id="does-dressmaker-support-steam-cloud">Does Dressmaker support Steam Cloud?</h3><p>Yes, Steam Cloud is listed among the game's Steam features. The developers have not published which files sync, so treat it as a safety net rather than a backup and keep your own copy of anything you would hate to lose.</p></li><li><h3 id="can-i-undo-a-cut-in-dressmaker">Can I undo a cut in Dressmaker?</h3><p>No. Cutting is irreversible by design and there is no undo. Practice on cheap cotton and check the mannequin preview before every cut.</p></li><li><h3 id="why-does-macos-say-the-prototype-may-be-malicious">Why does macOS say the prototype may be malicious?</h3><p>Because the itch.io prototype is not notarized, so macOS cannot verify the developer. The official fix is System Settings, Privacy &amp; Security, then Open Anyway.</p></li><li><h3 id="where-do-i-report-a-dressmaker-bug">Where do I report a Dressmaker bug?</h3><p>In the official Steam discussions or the developers' Discord, with your build, platform, exact steps and a screenshot.</p></li><li><h3 id="why-will-my-antivirus-not-let-dressmaker-run">Why will my antivirus not let Dressmaker run?</h3><p>Heuristic scanners sometimes quarantine files from small studios. Check your protection history, restore anything belonging to the game and exclude your Steam library.</p></li></ol>
+<aside class="sources"><h2>Where this came from</h2><ul><li><a href="https://steamcommunity.com/app/4019220/discussions/" target="_blank" rel="noopener">Dressmaker Steam discussions</a></li><li><a href="https://elyaradine.itch.io/dressmaker" target="_blank" rel="noopener">itch.io prototype page (macOS warning, Discord)</a></li><li><a href="https://store.steampowered.com/app/4019220/Dressmaker/" target="_blank" rel="noopener">Dressmaker on Steam (published requirements)</a></li></ul></aside>
+</article>
+<aside class="toc" aria-label="On this page"><details><summary>On this page</summary><nav><ol><li><a href="#1-dressmaker-will-not-start-on-windows">1. Dressmaker will not start on Windows</a></li><li><a href="#2-stuttering-or-a-low-frame-rate">2. Stuttering or a low frame rate</a></li><li><a href="#3-macos-says-the-prototype-may-be-malicious">3. macOS says the prototype may be malicious</a></li><li><a href="#4-the-itchio-download-will-not-unzip">4. The itch.io download will not unzip</a></li><li><a href="#5-itchio-will-not-load-at-all">5. itch.io will not load at all</a></li><li><a href="#6-saves-progress-and-steam-cloud">6. Saves, progress and Steam Cloud</a></li><li><a href="#7-you-cut-the-wrong-fabric">7. You cut the wrong fabric</a></li><li><a href="#8-where-to-report-a-real-bug">8. Where to report a real bug</a></li><li><a href="#when-to-report-it">When to report it</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav></details></aside>
+</div>
 </div>
 </main>
 <footer class="site-foot">

@@ -4,11 +4,13 @@ import { LINKS } from '../data/site.mjs';
 const SHOT_cut = SHOTS.cut.src;
 
 const BODY = [
+  "> Short answer: If you want the feeling of Dressmaker without the dressmaking, start with **Unpacking**, **A Little to the Left** or **Wilmot's Warehouse** for tactile organising, and **Calico** or **Strange Horticulture** for cozy making with a shop attached. None of them replace Dressmaker's fabric-layout mechanic, which is the part that is genuinely unusual.",
+  "",
   "If you go looking for games like Dressmaker, most cozy lists hand you farming sims and shop-management games. Dressmaker is neither. The [dressmaker game](/) is about making one beautiful thing with your hands: choosing the fabric, laying out the pattern pieces, cutting, sewing, decorating. The shop is scaffolding around that.",
 
   "The question worth asking is not whether a game is cozy. It is whether it puts a real object under your hands. The ten below pass that test in different ways, some by making, some by decorating, some by organizing. None of them is Dressmaker, and where each falls short is worth saying out loud.",
 
-  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.)",
 
   "## How to choose",
 
@@ -96,9 +98,23 @@ export const page = {
   title: 'Games Like Dressmaker: 10 Cozy Crafting Picks',
   description: 'Ten cozy games like Dressmaker, picked for hands-on making, decorating and organizing, with Steam links and an honest note on what none of them replace.',
   h1: 'Games Like Dressmaker',
+  eyebrow: "Recommendations",
+  lede: "If you go looking for games like Dressmaker, most cozy lists hand you farming sims and shop-management games. Dressmaker is neither. The dressmaker game is about making one beautiful thing with your hands: choosing the fabric, laying out the pattern pieces, cutting, sewing, decorating. The shop is scaffolding around that.",
+  facts: [
+    ['Closest match', "Unpacking"],
+    ['For organising', "A Little to the Left, Wilmot’s Warehouse"],
+    ['For cozy making', "Calico, Strange Horticulture"],
+    ['For town life', "Stardew Valley, Cozy Grove"],
+    ['Launch bundle', "Town to City"],
+    ['Unreplaceable', "The fabric-layout mechanic"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
   crumbs: [{ name: 'Home', url: '/' }, { name: 'Games Like Dressmaker', url: '/games-like' }],
+  sources: [
+    ['Dressmaker on Steam', LINKS.steam],
+    ['Official itch.io devlog', LINKS.itchDevlog],
+  ],
   body: BODY,
 };

@@ -2,6 +2,8 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
+  "> Short answer: This wiki collects what is actually documented about Dressmaker: fabric families and how they behave, the pattern pieces a dress is assembled from, the decoration types, the order of the making loop, and a plain-English glossary. In-game numbers the developers have not published — per-bolt prices, unlock order, the full attribute list — are marked as unpublished rather than guessed.",
+  "",
   "This is the reference layer for the [dressmaker game](/) — the tables to keep open in a second tab. Dressmaker is a cozy dressmaking simulation from elyaradine, sarandipityx and raithza, published by **Free Lives** and out on Steam since **September 21, 2026** for Windows and macOS.",
   "",
   "Everything here comes from what the developers published themselves: the official [Steam store page](@LINK_steam@) and their own [itch.io devlog](@LINK_devlog@). Where a number is not published, this page says so instead of guessing.",
@@ -27,7 +29,7 @@ const BODY = [
   "",
   "A dress here is not an item you pick off a menu. It is assembled from pattern pieces you arrange on cloth, cut out and sew together, and the store page is explicit that 'how you choose to arrange and cut out your fabric is what appears on the final dress' — you 'take full control over what fabric to use for each panel.' Two words decide the result. **Grain** is the direction the threads run in the cloth; align a piece with it and the panel hangs straight. **Bias** means cutting diagonally across that line, which makes the same cloth drape softer.",
   "",
-  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.)",
   "",
   "| Garment area | What it decides | What to consider |",
   "|---|---|---|",
@@ -93,6 +95,16 @@ export const page = {
   title: 'Dressmaker Wiki: Fabrics, Patterns & Accessories',
   description: 'A fan-made Dressmaker wiki built from the official store page and devlog: fabric families, pattern pieces, decorations, the making loop and a glossary.',
   h1: 'Dressmaker Wiki',
+  eyebrow: "Reference",
+  lede: "This is the reference layer for the dressmaker game — the tables to keep open in a second tab. Dressmaker is a cozy dressmaking simulation from elyaradine, sarandipityx and raithza, published by Free Lives and out on Steam since September 21, 2026 for Windows and macOS.",
+  facts: [
+    ['Fabric families', "Cotton, linen, wool, silk, velvet"],
+    ['Launch content', "450+ fabrics, 150+ dress pieces"],
+    ['Accessories', "350+ across buttons, bows, appliqué, lace"],
+    ['Assembly', "Pattern pieces arranged on cloth by hand"],
+    ['Decoration', "Placed freely after sewing"],
+    ['Not published', "Per-bolt stats, prices, unlock order"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -117,6 +129,10 @@ export const page = {
       },
       isPartOf: { '@type': 'WebSite', name: 'Dressmaker Guide', url: 'https://dressmakerguide.com' },
     },
+  ],
+  sources: [
+    ['Dressmaker on Steam (fabrics, accessories, assembly)', LINKS.steam],
+    ['Official itch.io devlog', LINKS.itchDevlog],
   ],
   body: BODY,
 };

@@ -3,7 +3,12 @@ import { renderMarkdown } from './md.mjs';
 
 const escAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-const ICON = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="#9c3d5f" d="M16 2.5 7 9.5v4.2l9-3.4 9 3.4V9.5z"/><path fill="none" stroke="#c2708f" stroke-width="2" stroke-dasharray="3 3" d="M4 20h24"/><path fill="#e8b7c8" d="M8 22h16l3 7H5z"/></svg>';
+/* The site mark: a dress form over a stitch line. Ours, not the developers' logo. */
+const ICON = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">' +
+  '<rect width="32" height="32" rx="9" fill="#7d2b4a"/>' +
+  '<path fill="#fff" d="M16 5.5 9.5 10v3.4l6.5-2.5 6.5 2.5V10z"/>' +
+  '<path fill="none" stroke="#f0c3d3" stroke-width="1.6" stroke-dasharray="2.4 2.4" stroke-linecap="round" d="M6 20.5h20"/>' +
+  '<path fill="#f0c3d3" d="M9.5 23h13l2.2 4.5H7.3z"/></svg>';
 
 /* Global navigation. Every page links home with the exact-match anchor "dressmaker game",
    which is the rule that keeps the site from having orphan pages. */
@@ -76,12 +81,70 @@ export function faqLd(items) {
   };
 }
 
+
+
+/* The fact strip under a page head: at-a-glance answers for the reader and for a featured snippet.
+   Entries are [label, value] pairs supplied by the page, so nothing here is invented. */
+function factsHtml(facts) {
+  return '<ul class="facts">' + facts.map(([k, v]) =>
+    '<li><span class="k">' + k + '</span><span class="v">' + v + '</span></li>').join('') + '</ul>';
+}
+
+
+/* Sources: the official pages a page's claims were checked against. Curated per page rather than
+   scraped, so it is a short honest list and not a dump of every outbound link. */
+function sourcesHtml(sources) {
+  return '<aside class="sources"><h2>Where this came from</h2><ul>' +
+    sources.map(([label, url]) =>
+      '<li><a href="' + url + '" target="_blank" rel="noopener">' + label + '</a></li>').join('') +
+    '</ul></aside>';
+}
+
+/* The page head: an optional eyebrow kicker, the single H1, an optional standfirst, and the
+   review date. Kept as one unit so every page starts the same way. */
+function pageHead(page) {
+  const out = ['<header class="page-head">'];
+  if (page.eyebrow) out.push('<p class="eyebrow">' + page.eyebrow + '</p>');
+  out.push('<h1>' + page.h1 + '</h1>');
+  if (page.lede) out.push('<p class="lede">' + page.lede + '</p>');
+  if (page.updated) {
+    /* Date only. The non-affiliation notice lives in the footer where it belongs; keeping it in the
+       head made legal text the second thing a reader saw on every page. */
+    out.push('<p class="updated"><time datetime="' + page.updated + '">Reviewed ' + page.updatedHuman + '</time></p>');
+  }
+  out.push('</header>');
+  return out.join('\n');
+}
+
+/* A table of contents generated from the H2s actually present in the body, so it can never list a
+   section that does not exist. Collapsed behind a details element on mobile, sticky on desktop. */
+function tocHtml(body) {
+  const items = [];
+  for (const m of String(body).matchAll(/^##\s+(.+)$/gm)) {
+    const text = m[1].trim();
+    const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60);
+    items.push({ id, text });
+  }
+  if (items.length < 3) return '';
+  const links = items.map((i) => '<li><a href="#' + i.id + '">' + i.text + '</a></li>').join('');
+  /* Emitted CLOSED. Above 1080px the CSS hides the summary and shows the list expanded under a
+     static label; below 1080px the details stays shut and moves to the top of the flow, instead of
+     rendering 362px of expanded links after the article. */
+  return '<aside class="toc" aria-label="On this page">' +
+    '<details><summary>On this page</summary><nav><ol>' + links + '</ol></nav></details>' +
+    '</aside>';
+}
+
 export function renderPage(page) {
   const url = SITE.origin + (page.url === '/' ? '/' : page.url + '/');
   const social = (page.socialImage || (SITE.origin + '/assets/og-default.png'));
   const graph = [];
   if (page.schema) graph.push(...[].concat(page.schema));
   if (page.crumbs && page.crumbs.length > 1) graph.push(breadcrumbLd(page.crumbs));
+
+  /* Auto: any page with enough sections gets an on-this-page rail. A page can opt out with
+     toc: false, and anything with fewer than three H2s gets nothing regardless. */
+  const toc = page.toc === false ? '' : tocHtml(page.body);
 
   const head = [
     '<!DOCTYPE html>',
@@ -105,6 +168,8 @@ export function renderPage(page) {
     '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
     '<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">',
     '<link rel="stylesheet" href="/assets/styles.css">',
+    '<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces.woff2" crossorigin>',
+    '<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter.woff2" crossorigin>',
     page.preload ? '<link rel="preload" as="image" href="' + escAttr(page.preload) + '" fetchpriority="high">' : '',
     SITE.ga4Id ? '<script async src="https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4Id + '"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","' + SITE.ga4Id + '");</script>' : '',
     graph.length ? '<script type="application/ld+json">' + JSON.stringify(graph.length === 1 ? graph[0] : { '@context': 'https://schema.org', '@graph': graph }) + '</script>' : '',
@@ -120,10 +185,16 @@ export function renderPage(page) {
     '</header>',
     crumbsHtml(page.crumbs),
     '<main id="main">',
-    '<div class="wrap prose">',
-    '<h1>' + page.h1 + '</h1>',
-    page.updated ? '<p class="updated">Last updated <time datetime="' + page.updated + '">' + page.updatedHuman + '</time>. Dressmaker is a fan-made guide and is not affiliated with the developers.</p>' : '',
+    '<div class="wrap">',
+    pageHead(page),
+    page.facts && page.facts.length ? factsHtml(page.facts) : '',
+    '<div class="layout' + (toc ? ' has-toc' : '') + '">',
+    '<article class="prose">',
     renderMarkdown(page.body),
+    page.sources && page.sources.length ? sourcesHtml(page.sources) : '',
+    '</article>',
+    toc,
+    '</div>',
     '</div>',
     '</main>',
     '<footer class="site-foot">',

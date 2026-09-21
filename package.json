@@ -6,11 +6,12 @@
   "description": "Static fan guide for the cozy dressmaking game Dressmaker.",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "build:images": "python scripts/make-images.py",
+    "test": "node scripts/test-renderer.mjs",
     "audit": "node scripts/audit.mjs",
-    "serve": "node scripts/serve.mjs",
     "verify": "node scripts/verify.mjs",
-    "check:links": "node scripts/check-external-links.mjs"
+    "check:links": "node scripts/check-external-links.mjs",
+    "serve": "node scripts/serve.mjs",
+    "build:images": "python scripts/make-images.py"
   },
   "engines": {
     "node": ">=20"

@@ -2,10 +2,12 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
+  "> Short answer: The Dressmaker demo is a **free prototype on itch.io** — name your own price, Windows, macOS and Linux, about 115–128 MB. It is a standalone prototype, not a Steam demo of the full game, and the paid release on Steam is a much larger game.",
+  "",
   "The free **Dressmaker demo** is the prototype on the developers' own itch.io page: [elyaradine.itch.io/dressmaker](@LINK_itch@). It is **name your own price**, so you can take it for $0, and it runs on Windows, macOS and Linux. It is the only official free download that exists.",
   "Two things to get straight first. This is a **prototype**, not the finished game, and the developers label it that way themselves. The paid **Steam release is a separate, much bigger game**: not the same download with more content bolted on.",
   "If you are here for the story, the town of clients and an ending, skip straight to the Steam release. If you want to know whether cutting a pattern on the bias feels as good as it sounds, the prototype answers that in an evening.",
-  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@)",
+  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@ Hand the dress in, keep working on it, or sell it instead of delivering the commission.)",
   "## Where the free Dressmaker download is",
   "The download lives at [elyaradine.itch.io/dressmaker](@LINK_itch@). elyaradine is Jonathan Hau-Yoon, one of the three developers behind the game, so it is first-party, not a mirror.",
   "The prototype is listed as **name your own price**. Clicking **Download Now** opens itch.io's purchase page, where the price field accepts $0. Pay something if you want to support the team; the files are the same either way. That page is [the Dressmaker download page](@LINK_itchDownload@).",
@@ -83,6 +85,16 @@ export const page = {
   title: "Dressmaker Demo: Free Prototype Download on itch.io",
   description: "The Dressmaker demo is a free, name-your-own-price prototype on itch.io: Windows, macOS and Linux downloads, file sizes and the macOS fix.",
   h1: 'Dressmaker Demo and Free Download',
+  eyebrow: "Free prototype",
+  lede: "The free Dressmaker demo is the prototype on the developers' own itch.io page: elyaradine.itch.io/dressmaker. It is name your own price, so you can take it for $0, and it runs on Windows, macOS and Linux. It is the only official free download that exists.",
+  facts: [
+    ['Price', "Free, name your own price"],
+    ['Where', "itch.io, the developers’ own page"],
+    ['Platforms', "Windows, macOS and Linux"],
+    ['Download', "About 115–128 MB"],
+    ['Version', "Prototype 0.5.5"],
+    ['Rating', "4.8 of 5 from 834 ratings"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -97,6 +109,11 @@ export const page = {
         acceptedAnswer: { '@type': 'Answer', text: a },
       })),
     },
+  ],
+  sources: [
+    ['Dressmaker prototype on itch.io', LINKS.itch],
+    ['itch.io download page', LINKS.itchDownload],
+    ['itch.io devlog', LINKS.itchDevlog],
   ],
   body: BODY,
 };

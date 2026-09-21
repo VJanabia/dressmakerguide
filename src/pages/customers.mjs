@@ -2,6 +2,8 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
+  "> Short answer: Every commission carries a written brief with **named attribute targets** — one official example reads Quality 70, Flowers 60, Cute 30, Romantic 45 — plus an occasion and a budget. Meet the targets and the customer reacts warmly and you gain coin and reputation; ignore the brief and the reaction tells you so. The developers have never published a customer roster or how the star rating is calculated.",
+  "",
   "Customer preferences in Dressmaker are not a hidden stat sheet. The developers have published no client roster, no preference score and no table of who wants which lace. What you get is a brief: an occasion, a person with their own taste, and a dress to make.",
   "",
   "This page is about the pattern behind those requests, and what it costs to read one wrong. New here? Start with our [dressmaker game](/) overview.",
@@ -70,7 +72,7 @@ const BODY = [
   "",
   "Notice how often the safe answer is also the polite one. A vague customer is not asking you to gamble; they are asking you to be reliable.",
   "",
-  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@)",
+  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ Hand-in is the moment the whole commission was for: the customer reacts in her own words.)",
   "",
   "## How the reward loop works",
   "",
@@ -151,6 +153,16 @@ export const page = {
   title: "Dressmaker Customer Preferences: How to Read a Brief",
   description: "How Dressmaker customer preferences work: read the occasion and taste in a brief, turn it into real design choices, and sabotage on purpose without regret.",
   h1: 'Dressmaker Customer Preferences',
+  eyebrow: "Commission guide",
+  lede: "Customer preferences in Dressmaker are not a hidden stat sheet. The developers have published no client roster, no preference score and no table of who wants which lace. What you get is a brief: an occasion, a person with their own taste, and a dress to make.",
+  facts: [
+    ['What a brief has', "Occasion, taste, budget, targets"],
+    ['Targets are numeric', "Quality 70, Flowers 60, Cute 30, Romantic 45"],
+    ['Limits too', "Quality 0/80, Formal 0/50, Simple 0/75"],
+    ['Hard rules exist', "Some briefs say \"use only black\""],
+    ['Reward', "Coin, reputation and a star rating"],
+    ['Second income', "Off-rack dresses in the shop window"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -165,6 +177,10 @@ export const page = {
         acceptedAnswer: { '@type': 'Answer', text: a },
       })),
     },
+  ],
+  sources: [
+    ['Dressmaker on Steam (customer and reward wording)', LINKS.steam],
+    ['Official itch.io devlog', LINKS.itchDevlog],
   ],
   body: BODY,
 };

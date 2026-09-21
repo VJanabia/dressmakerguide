@@ -2,6 +2,8 @@ import { SHOTS, resolveShots } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
+  "> Short answer: Most Dressmaker problems are one of five things: an out-of-date GPU driver, the macOS Gatekeeper warning on the un-notarised itch.io prototype, a partially downloaded file, a laptop thermally throttling, or a network blocking itch.io. Work through those in order before assuming the game is broken, and report real bugs on the official Steam discussions.",
+  "",
   "Dressmaker is a small, well-behaved game, so when something breaks it is usually Steam, a driver, macOS Gatekeeper or your network.",
   "The paid Steam release and the free itch.io prototype are different builds, so a fix for one may not apply to the other. The [dressmaker game](/) home page covers the difference.",
   "## 1. Dressmaker will not start on Windows",
@@ -61,7 +63,7 @@ const BODY = [
   "Steam shows where the game lives: right-click Dressmaker in your Library, then Manage → Browse local files, and look for a saves folder inside or beside it. Steam also keeps per-game data under userdata, your account ID, then App ID 4019220.",
   "> Warning: we have not verified a save path, so copy the whole folder rather than single files.",
   "## 7. You cut the wrong fabric",
-  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.)",
   "### Cutting is permanent by design",
   "There is no undo, and no way to lift a pattern piece off the cloth once the shears have gone through it. How you cut your fabric is what appears on the finished dress.",
   "### Practice on cheap fabric",
@@ -117,6 +119,16 @@ export const page = {
   title: 'Dressmaker Troubleshooting: Common Fixes',
   description: 'Dressmaker troubleshooting for PC and Mac: launch failures, stutter, the macOS warning, failed itch.io downloads, saves and where to report a bug.',
   h1: 'Dressmaker Troubleshooting',
+  eyebrow: "Fixes",
+  lede: "Dressmaker is a small, well-behaved game, so when something breaks it is usually Steam, a driver, macOS Gatekeeper or your network.",
+  facts: [
+    ['Most common', "Out-of-date GPU drivers"],
+    ['macOS', "Gatekeeper blocks the itch.io prototype"],
+    ['Stutter', "Background apps, drivers, thermals"],
+    ['itch.io', "Zips are 115–128 MB, check the download"],
+    ['Saves', "Steam Cloud is listed; back up anyway"],
+    ['Bugs', "Official Steam discussions"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -132,6 +144,11 @@ export const page = {
         acceptedAnswer: { '@type': 'Answer', text: a },
       })),
     },
+  ],
+  sources: [
+    ['Dressmaker Steam discussions', LINKS.steamDiscussions],
+    ['itch.io prototype page (macOS warning, Discord)', LINKS.itch],
+    ['Dressmaker on Steam (published requirements)', LINKS.steam],
   ],
   body: BODY,
 };

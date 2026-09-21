@@ -5,6 +5,8 @@ const SHOT_cut = SHOTS.cut.src;
 const SHOT_sew = SHOTS.sew.src;
 
 const BODY = [
+  "> Short answer: To play Dressmaker: read the customer's brief in the sketchbook, set the fabric and colour, buy cloth, arrange the pattern pieces on it, cut, sew at the machine, decorate, then hand the dress in for coin, reputation and a star rating. The two rules that decide everything are reading the brief before you design, and previewing your layout on the mannequin before you cut.",
+  "",
   "Dressmaker is a cozy crafting game about making one dress, for one person, for one occasion. A customer walks in with a request, you design in your sketchbook, buy fabric, arrange pattern pieces, cut, sew, decorate and hand the dress over.",
   "Nothing is timed, and there is no fail state in the usual sense. The tension comes from one rule: cutting is permanent and fabric costs coin.",
   "**The five stages, and what each costs if you get it wrong:**",
@@ -29,7 +31,7 @@ const BODY = [
   "One sentence from the official [Steam store page](@LINK_steam@) explains the whole game: \"Whether your pattern is aligned to the grain or cut on bias, how you choose to arrange and cut out your fabric is what appears on the final dress.\"",
   "Grain is the direction the threads run, and a piece lined up with it behaves predictably: straight, stable, even. Bias is a diagonal cut across that weave, and the same cloth suddenly has more give and a different hang. Bias is worth choosing on purpose, and painful by accident on a piece that needed to stay square.",
   "Placement is permanent, so use the preview. The official flow is \"arrange and cut out your dress pattern, preview on a mannequin and sew together.\"",
-  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.)",
   "## Cutting: the point of no return",
   "Once the shears go through the cloth, that fabric is spent. No amount of careful sewing fixes a panel cut on the wrong angle, and no trim hides a print sliced through its motif.",
   "Plan the whole layout before the first cut:",
@@ -38,7 +40,7 @@ const BODY = [
   "## Sewing: feeding fabric through the machine",
   "Official wording: \"Feed your fabric through the sewing machine to stitch it together.\" The screenshot for this step is captioned \"A sewing machine with infinite bobbin,\" so there is no spool to manage and no thread to run out. That leaves the part that matters: seam order and alignment.",
   "No seam sequence has been published, so think it through. Structural seams have to exist before anything can line up against them, and panels have to meet edge to edge or the dress pulls.",
-  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@)",
+  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@ Panels go through the machine one seam at a time, with the controls on screen as you go.)",
   "## Decorating: buttons, bows, appliqué and lace",
   "Buttons, bows and appliqué are named on the store page, along with lace trims and other accessories, and the official promise is that you can place them \"wherever you like with complete creative freedom.\"",
   "Practically, decoration is the cheapest way to change a dress and the fastest way to ruin one. A busy print plus heavy lace plus a large bow is three good ideas competing for one square of cloth. If the fabric is the star, keep trim near the edges. If the silhouette is plain, decoration is where the personality comes from.",
@@ -73,6 +75,16 @@ export const page = {
   title: 'How to Play Dressmaker: Cutting, Sewing & Design',
   description: 'How to play Dressmaker step by step: read the commission, sketch the design, choose fabric, lay out the pattern, cut, sew, decorate and turn the dress in.',
   h1: 'How to Play Dressmaker',
+  eyebrow: "Walkthrough",
+  lede: "Dressmaker is a cozy crafting game about making one dress, for one person, for one occasion. A customer walks in with a request, you design in your sketchbook, buy fabric, arrange pattern pieces, cut, sew, decorate and hand the dress over.",
+  facts: [
+    ['The loop', "Brief, design, cut, sew, decorate, hand in"],
+    ['Decide first', "Read the brief before you design"],
+    ['Never skip', "The mannequin preview"],
+    ['Paid in', "Coin, reputation and a star rating"],
+    ['Cutting', "Permanent — there is no undo"],
+    ['Time to learn', "About 30 minutes to the first good dress"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -95,6 +107,10 @@ export const page = {
         { '@type': 'HowToStep', name: 'Turn the dress in', text: 'Hand the finished dress to the customer for coin and reputation, or display your own designs in the shop window and sell them off the rack.' },
       ],
     },
+  ],
+  sources: [
+    ['Dressmaker on Steam (official feature list)', LINKS.steam],
+    ['Official Steam announcements', LINKS.steamNews],
   ],
   body: BODY,
 };

@@ -38,11 +38,13 @@ const FAQ = [
 const FAQ_BODY = FAQ.map(([q, a]) => '### ' + q + '\n\n' + a).join('\n\n');
 
 const BODY = [
+  "> Short answer: Dressmaker released on **Steam on September 21, 2026** for **Windows and macOS**, at **$14.99** with a **10% launch discount** that brings it to **$13.49**. It is Steam App ID 4019220, developed by Cozy Lives and published by Free Lives.",
+  "",
   "Dressmaker released on **Steam on September 21, 2026** with **32 achievements**, at **$14.99** with a **10% launch discount** that brings it to **$13.49**. It is a Windows and macOS game from **Cozy Lives**, published by **Free Lives**, Steam App ID **4019220**. No console version exists.",
   "",
   "Here is the checkable half of the launch: the date, whether it slipped, the price outside the US, what the money buys, the bundles, and how to catch a sale. Still unsure about the sewing loop? The [free Dressmaker demo](/demo) answers that faster than any article can.",
   "",
-  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@)",
+  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ Hand-in is the moment the whole commission was for: the customer reacts in her own words.)",
   "",
   "## Dressmaker release facts at a glance",
   "",
@@ -110,7 +112,7 @@ const BODY = [
   "",
   "One piece of good news for Linux and handheld players: the itch.io prototype has a native Linux build, so you can test the cutting and sewing for nothing even though the Steam release has no Linux depot. Full specifications are on the [Dressmaker system requirements](/system-requirements) page.",
   "",
-  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@)",
+  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@ Hand the dress in, keep working on it, or sell it instead of delivering the commission.)",
   "",
   "## Is it worth buying on launch day?",
   "",
@@ -142,6 +144,16 @@ export const page = {
   title: 'Dressmaker Steam: Release Date, Price & Platforms',
   description: 'Dressmaker Steam release date is September 21, 2026, at $14.99 with a 10% launch discount. Price, platforms, bundles and how to catch a sale.',
   h1: 'Dressmaker Steam Release Date and Price',
+  eyebrow: "Steam release",
+  lede: "Dressmaker released on Steam on September 21, 2026 with 32 achievements, at $14.99 with a 10% launch discount that brings it to $13.49. It is a Windows and macOS game from Cozy Lives, published by Free Lives, Steam App ID 4019220. No console version exists.",
+  facts: [
+    ['Released', "September 21, 2026"],
+    ['US price', "$14.99, or $13.49 at launch"],
+    ['Platforms', "Windows and macOS"],
+    ['Steam App ID', "4019220"],
+    ['Developer', "Cozy Lives"],
+    ['Publisher', "Free Lives"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -178,6 +190,12 @@ export const page = {
         acceptedAnswer: { '@type': 'Answer', text: a },
       })),
     },
+  ],
+  sources: [
+    ['Dressmaker on Steam (price, platforms, requirements)', LINKS.steam],
+    ['Official Steam announcements', LINKS.steamNews],
+    ['Scalding September Tea: price announcement', LINKS.itchPricePost],
+    ['SteamDB app 4019220 (packages, depots)', LINKS.steamDb],
   ],
   body: BODY,
 };

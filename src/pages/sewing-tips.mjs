@@ -6,6 +6,8 @@ const SHOT_decorate = SHOTS.decorate.src;
 const LINK_steam = LINKS.steam;
 
 const BODY = [
+  "> Short answer: The biggest gains in Dressmaker come from four decisions: match the grain unless a bias cut is deliberate, keep large prints off small pattern pieces, preview every layout on the mannequin before cutting, and buy the cheapest cloth that meets the brief while you are still learning. Decoration rescues a plain dress; it cannot rescue a badly cut one.",
+  "",
   "Most dresses in Dressmaker are lost before the sewing machine is switched on. Where each pattern piece lands on the cloth, and which way the grain runs through it, is what your customer sees at the end.",
   "",
   "This page covers the practical half of the craft: grain and bias, print scale, fabric per panel, layout planning, seam order and trim discipline. New to the [dressmaker game](/)? Start with [how to play Dressmaker](/how-to-play).",
@@ -40,7 +42,7 @@ const BODY = [
   "",
   "## Planning the Layout Before You Cut",
   "",
-  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ Pattern pieces laid on the cloth decide what the dress will look like. Then the shears decide it permanently.)",
   "",
   "Nothing later repairs a bad layout. Once the shears are through the cloth, that fabric is spent, so plan the whole table before you place the first piece.",
   "",
@@ -54,7 +56,7 @@ const BODY = [
   "",
   "## Decoration Discipline",
   "",
-  "![A finished strawberry-print dress on a mannequin beside a tray of accessories](@SHOT_decorate@)",
+  "![A finished strawberry-print dress on a mannequin beside a tray of accessories](@SHOT_decorate@ Sewing finished, decorating not: buttons, bows and lace can still be added before you hand it over.)",
   "",
   "Trim can rescue a plain dress. It cannot rescue a badly cut one. Decoration sits on top of the cut, so it frames a good decision or points at a bad one: lace above a broken print does not hide it.",
   "",
@@ -90,6 +92,16 @@ export const page = {
   title: "Dressmaker Guide: Sewing Tips for Better Dresses",
   description: "Dressmaker guide: how grain, bias, print scale and fabric choice decide every panel you cut, plus seam order, trim discipline and a fix-it list.",
   h1: 'Dressmaker Guide: Sewing Tips and Pattern Advice',
+  eyebrow: "Guide",
+  lede: "Most dresses in Dressmaker are lost before the sewing machine is switched on. Where each pattern piece lands on the cloth, and which way the grain runs through it, is what your customer sees at the end.",
+  facts: [
+    ['Grain first', "Align unless a bias cut is deliberate"],
+    ['Prints', "Keep large repeats off small panels"],
+    ['Before cutting', "Preview every layout on the mannequin"],
+    ['Seam order', "Assemble flat before you close the garment"],
+    ['Spending', "Cheap cloth while you are still learning"],
+    ['Trim', "Rescues a plain dress, never a bad cut"],
+  ],
   updated: '2026-09-21',
   updatedHuman: 'September 21, 2026',
   ogType: 'article',
@@ -108,6 +120,10 @@ export const page = {
       author: { '@type': 'Organization', name: SITE.name },
       publisher: { '@type': 'Organization', name: SITE.name },
     },
+  ],
+  sources: [
+    ['Dressmaker on Steam (grain and bias wording)', LINKS.steam],
+    ['Official itch.io devlog', LINKS.itchDevlog],
   ],
   body: BODY,
 };
