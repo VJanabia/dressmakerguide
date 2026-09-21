@@ -153,3 +153,24 @@ Do not extrapolate a scoring formula from four attribute names.
 - Engine name, dev studio size beyond "three full-time developers".
 - Any patch notes for the released Steam build beyond the announcements listed above.
 - Sales figures, player counts beyond the launch-day peak noted above, or review percentages as a verdict.
+
+
+## Steam news hub coverage - VERIFIED 2026-09-21
+
+The ISteamNews endpoint for appid 4019220 returns exactly 8 items, all labelled "Community Announcements".
+There is no "Patchnotes" feed at all.
+
+| Date | Title |
+| --- | --- |
+| 2026-04-15 | Dressmaker April Tea |
+| 2026-05-27 | Dressmaker May Tea |
+| 2026-06-06 | Dressmaker showcase at Wholesome Direct |
+| 2026-06-09 | Dressmaker Just Hit 100k Wishlists! |
+| 2026-07-28 | Dressmaker July Tea: Launch Date Announcement |
+| 2026-08-31 | Dressmaker August Tea |
+| 2026-09-07 | Scalding September Tea: Price Announcement |
+| 2026-09-21 | Dressmaker - Out Now! |
+
+Consequences for the site: the Steam hub carries no posts before **April 15, 2026**, so it is not a
+complete project history - the 2025 prototype era exists only on the itch.io devlog. There is also
+still no post-launch patch post as of September 21, 2026. Re-check with scripts/verify-news.py.
