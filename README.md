@@ -65,6 +65,9 @@ scripts/build.mjs        static site generator
 scripts/audit.mjs        post-build verification
 docs/dressmaker-facts.md verified facts and, more importantly, what is NOT verified
 docs/page-brief.md       the writing rules used for every page
+docs/docs-rewrite-brief.md   the documentation-shape rules: components, limits, output form
+docs/image-placement-brief.md  what each screenshot shows and where it belongs
+docs/design-system.md        fonts, colour tokens, page skeleton, house rules
 docs/audit-report.md     generated: per-page title/H1/word count/schema inventory
 ```
 
