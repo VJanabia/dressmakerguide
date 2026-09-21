@@ -175,4 +175,4 @@ None. Every check passed.
 
 ## Notes (non-fatal)
 
-- /how-to-play: 1430 words of body text (style target is 800-1200; long is fine when every section earns its place)
+None.
