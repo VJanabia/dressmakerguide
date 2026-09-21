@@ -14,8 +14,21 @@ const dist = path.join(root, 'dist');
 
 /* src path -> the single approved alt text for that picture. */
 const { SHOTS } = await import('../src/data/images.mjs');
+
 const REGISTRY_ALT = new Map(Object.values(SHOTS).map((s) => [s.src, s.alt]));
 const problems = [];
+/* The declared width/height on every screenshot must equal the real pixel size of the file. A
+   mismatch makes the browser reserve a box of the wrong shape and then stretch the picture to fill
+   it, which is exactly the bug that shipped once: 600x337 declared against 1100x619 files. */
+for (const [slot, shot] of Object.entries(SHOTS)) {
+  if (shot.width !== 1100 || shot.height !== 619) {
+    problems.push('image registry: slot ' + slot + ' declares ' + shot.width + 'x' + shot.height + ', expected 1100x619');
+  }
+  if (!shot.srcset || !shot.srcset.includes('-550.webp') || !shot.srcset.includes('-1100.webp')) {
+    problems.push('image registry: slot ' + slot + ' has no two-width srcset');
+  }
+}
+
 const notes = [];
 /* Utility pages are held to the technical checks (title, canonical, H1, links) but not to the
    editorial length targets, because nobody arrives on them from a search result. */

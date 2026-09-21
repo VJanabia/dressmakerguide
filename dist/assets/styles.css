@@ -483,7 +483,10 @@ th,td{padding:.6rem .8rem}
 }
 
 /* --- figures: reserve the true box, never stretch ------------------------- */
-figure img{width:100%;height:auto;aspect-ratio:1100 / 619;object-fit:cover;background:var(--paper-2)}
+/* No aspect-ratio override and no object-fit: the width/height attributes on the tag already 
+   reserve the correct box (no layout shift), and letting the image keep its own ratio means the 
+   browser can never stretch it to fill a box of a different shape. */
+figure img{width:100%;height:auto;background:var(--paper-2)}
 @media (min-width:1180px){figure{max-width:100%}}
 
 /* two screenshots side by side where a section has a pair */
