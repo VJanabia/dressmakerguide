@@ -493,3 +493,29 @@ figure img{width:100%;height:auto;background:var(--paper-2)}
 .shots{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:0 0 1.6rem}
 .shots figure{margin:0}
 .shots figcaption{font-size:var(--t-xs)}
+
+/* --- round 4: mobile overflow and tap targets ----------------------------- */
+
+/* The stacked table cards used a flex row with a fixed 42% label column. A long label plus a long
+   cell value could exceed the row and push text past the page edge (the homepage price table did
+   exactly that at 390px). The cells stack vertically instead, so nothing can overrun the row. */
+@media (max-width:640px){
+  tbody td{display:block;text-align:left;padding:.45rem 0}
+  tbody td::before{display:block;flex:none;width:auto;margin-bottom:.1rem}
+  tbody td:empty{display:none}
+  .table-wrap{overflow-wrap:anywhere}
+}
+
+/* Tap targets: the sidebar rows and the two disclosure summaries were under 40px tall. */
+.sidebar a{min-height:44px;display:flex;align-items:center;padding:.55rem .6rem}
+.sidebar summary,.toc summary{min-height:44px;display:flex;align-items:center}
+.sidebar summary::after,.toc summary::after{margin-left:auto}
+.crumbs a,.crumbs span{display:inline-block;padding:.25rem 0}
+
+/* Long unbroken strings (prices, URLs, identifiers) must never widen a page. */
+.prose,.answer,.callout,.facts,.sources{overflow-wrap:anywhere}
+table{overflow-wrap:anywhere}
+
+/* Breadcrumb links are inline by nature; give them enough padding to clear the 24px minimum
+   comfortably without turning one line of meta text into a stack of boxes. */
+.crumbs a,.crumbs span[aria-current]{min-height:28px;display:inline-flex;align-items:center;padding:.3rem .15rem}
