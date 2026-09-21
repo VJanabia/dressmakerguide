@@ -1,0 +1,5 @@
+# Keep the built site text-only in diffs; images are binary and noise in reviews.
+*.webp binary
+*.png binary
+*.html text eol=lf
+*.mjs text eol=lf

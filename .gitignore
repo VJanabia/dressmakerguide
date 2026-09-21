@@ -1,0 +1,19 @@
+# This project has zero runtime dependencies: there is no node_modules to ignore.
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local preview and audit byproducts
+*.log
+npm-debug.log*
+.audit-debug
+
+# Python bytecode from the two image scripts
+__pycache__/
+*.pyc
+
+# Scratch files
+*.tmp
+*.bak

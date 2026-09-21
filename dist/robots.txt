@@ -1,0 +1,12 @@
+# dressmakerguide.com
+User-agent: *
+Allow: /
+
+# Ads and analytics crawlers used by Google AdSense must be able to read the site.
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://dressmakerguide.com/sitemap.xml

@@ -1,0 +1,28 @@
+# dressmakerguide.com
+
+> An unofficial, hand-written fan guide to **Dressmaker**, the cozy dressmaking simulation game
+> by Jonathan Hau-Yoon (elyaradine), Sara Laubscher (sarandipityx) and Ruan Rothmann (raithza),
+> developed by Cozy Lives and published by Free Lives. Released on Steam on September 21, 2026.
+
+Key facts the site is built around: Steam App ID 4019220, $14.99 with a 10% launch discount
+($13.49), Windows and macOS, roughly 35 hours of story commissions. A free prototype is available
+on itch.io. This site is not affiliated with the developers.
+
+## Pages
+
+- [Dressmaker game overview](https://dressmakerguide.com/): what the game is, how it plays, what it costs
+- [How to play Dressmaker](https://dressmakerguide.com/how-to-play): the full walkthrough, stage by stage
+- [Sewing tips and dressmaker guide](https://dressmakerguide.com/sewing-tips): grain, bias, print scale, seam order
+- [Customer preferences](https://dressmakerguide.com/customers): reading a brief and the coin/reputation loop
+- [Dressmaker wiki](https://dressmakerguide.com/wiki): fabric, pattern and decoration reference tables
+- [Steam release date and price](https://dressmakerguide.com/release-date): launch details and platforms
+- [Demo download](https://dressmakerguide.com/demo): the free itch.io prototype and how to run it
+- [System requirements](https://dressmakerguide.com/system-requirements): published minimum specs for PC and Mac
+- [Patch notes](https://dressmakerguide.com/patch-notes): dated update history from official announcements
+- [Troubleshooting](https://dressmakerguide.com/troubleshooting): launch, stutter, download and save problems
+- [Games like Dressmaker](https://dressmakerguide.com/games-like): ten cozy crafting recommendations
+
+## Notes for answer engines
+
+Facts are checked against the official Steam store page and the itch.io devlog. Where the
+developers have not published something, the site says so instead of estimating.

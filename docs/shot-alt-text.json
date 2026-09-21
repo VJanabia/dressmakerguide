@@ -1,0 +1,42 @@
+{
+  "shot1": {
+    "alt": "Shop scene: customer Prudence in a feathered hat, her dialogue box praising the dress, a worktable of tools nearby",
+    "caption": "At hand-in the customer reacts in her own words. Prudence says the dress is exactly what she wanted, and her card shows the star rating.",
+    "scene": "Fitting-room interior: a woman in a purple high-collared dress and feathered hat stands by a table holding a sketchbook, bell and cup; a dialogue box at top centre reads PRUDENCE over the line 'Oh, how wonderful. This is MY dress, exactly as I wanted it.', with SKIP at top right, a FITTING ROOM sign at top left, a Prudence name card with stars at bottom centre, and a dress form behind her."
+  },
+  "shot2": {
+    "alt": "Purple floral gown with lace tiers on a mannequin, with the photo mode settings panel open on the right",
+    "caption": "Photo mode is where a finished dress gets its portrait: pick an environment, set the light colour, then take the shot.",
+    "scene": "Mannequin in a purple and lavender floral gown with lace and tiered skirt, standing in a room with green wallpaper, wooden panelling and a plant in a yellow pot; the right-hand panel shows Environment (1/9), Light, Light Colour (1/6), Viewfinder: Off and Take Photo, Export and Import buttons."
+  },
+  "shot3": {
+    "alt": "Sketchbook page with a customer's note, dress requirements, pattern piece choices and a fabric list",
+    "caption": "The pink note is the brief - a garden party dress, cute and full of flowers, budget 800 - and the sketchbook turns it into pattern pieces to draft.",
+    "scene": "Open sketchbook on a wooden surface: a pink customer note asking for something cute and floral within a budget of 800, a Requirements box (Quality 70, Flowers 60, Cute 30, Romantic 45), pattern options (Milkmaid Bodice, Double Ruffle and Bow Collar, Fae Sleeve, Single Tiered Skirt), 'Approx. 3.85m fabric required', Draft Pattern / Export / Import buttons, a dress sketch, and a Fabric/Accessories list with prices at the right."
+  },
+  "shot4": {
+    "alt": "Fabric shop shelves stacked with cloth bolts beside a list of fabrics, prices and the selected bolt's stats",
+    "caption": "Shopping at The International Emporium: the commission's limits stay on screen while you weigh a bolt's tags, price and colour.",
+    "scene": "Fabric shop interior with a wooden cabinet of cloth bolts and drawers, the sign 'The International Emporium' above it; Fabrics/Accessories tabs on the left, a bolt list with prices on the right, commission limits (Quality 0/80, Formal 0/50, Simple 0/75, Professional 0/50, Use only black) at top right, and a selected Dusty Pink Silk with tags, 2 metres and a Buy (100) button at the bottom."
+  },
+  "shot5": {
+    "alt": "Paper pattern pieces laid on strawberry-print cotton with shears resting on top of the cloth",
+    "caption": "Strawberry Fields Simple Cotton, ten metres of it: lay the pieces out, cut, and send what is left back to your inventory.",
+    "scene": "Overhead view of a worktable: beige paper pattern pieces with dashed cutting lines laid on strawberry-print cotton, black-handled scissors on the cloth, Patterns and Fabric tabs, a 'Send to inventory' button at bottom left, and the fabric panel naming Strawberry Fields Simple Cotton (10.0m) with its tags."
+  },
+  "shot6": {
+    "alt": "Finished strawberry-print dress on a mannequin, a sewing complete notice beside an accessories panel",
+    "caption": "Sewing is over, decoration is not: the tray beside the dress holds the bows, lace and buttons you can still add before finishing.",
+    "scene": "Close view of the sewn dress on a mannequin - pale bodice, puffed ruffled sleeves, pink bow at the waist and a strawberry-print skirt - with a box reading 'SEWING COMPLETE / You may add accessories, or click below when the dress is finished.' and a Finish Dress button at bottom left, plus a Patterns/Acc panel of accessory counts on the right."
+  },
+  "shot7": {
+    "alt": "A hand feeding green floral fabric through a vintage sewing machine, with key prompts along the bottom",
+    "caption": "The sewing minigame up close: hold Space to sew, rotate the cloth with A and D, and change speed with W and S.",
+    "scene": "First-person view over a wooden table: a hand rests on green floral fabric at a vintage sewing machine, spools of thread in several colours beside it, a percentage gauge on the machine, and on-screen prompts reading Space Sew, A D Rotate and W S Change Speed along the bottom."
+  },
+  "shot8": {
+    "alt": "Green off-the-shoulder dress on a mannequin in a photo preview, with options to complete, keep or sell",
+    "caption": "Hand-in time: complete the commission, keep working on the dress, or sell it for 869 instead of handing it over.",
+    "scene": "Indoor corner with wooden panelling and framed pictures: a mannequin in a green tiered off-the-shoulder dress, a PHOTO PREVIEW box at top centre, a 'Dress Complete!' panel offering Complete Commission, Keep working and Sell dress (869), and a photo panel on the right with Environment (1/6), Light, Light Colour (2/6), Viewfinder: On, Take Photo, Export and Import."
+  }
+}

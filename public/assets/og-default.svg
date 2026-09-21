@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Dressmaker Guide">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbeef2"/><stop offset="1" stop-color="#f6e3ea"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g stroke="#c2708f" stroke-width="3" fill="none" opacity="0.55">
+    <path d="M0 470 C 200 430, 340 520, 520 470 S 900 400, 1200 452"/>
+    <path d="M0 510 C 220 470, 360 560, 540 508 S 920 440, 1200 492" stroke-dasharray="14 12"/>
+  </g>
+  <g transform="translate(760 210)" fill="none" stroke="#9c3d5f" stroke-width="5" stroke-linejoin="round">
+    <path d="M60 0 L20 34 L20 60 L0 92 L0 168 L120 168 L120 92 L100 60 L100 34 Z"/>
+    <path d="M20 34 C 40 52, 80 52, 100 34"/>
+    <path d="M0 118 L120 118" stroke-dasharray="10 8"/>
+  </g>
+  <text x="80" y="250" font-family="Georgia, serif" font-size="76" fill="#241f26">Dressmaker Guide</text>
+  <text x="80" y="316" font-family="system-ui, sans-serif" font-size="30" fill="#4e4652">How to play, sewing tips and customer notes</text>
+  <text x="80" y="360" font-family="system-ui, sans-serif" font-size="26" fill="#6f6776">for the cozy dressmaking game</text>
+  <text x="80" y="560" font-family="system-ui, sans-serif" font-size="24" fill="#9c3d5f">dressmakerguide.com  ·  unofficial fan site</text>
+</svg>

@@ -1,0 +1,5 @@
+# ads.txt for dressmakerguide.com
+# Google AdSense requires a publisher line here once the site is approved.
+# Replace pub-0000000000000000 with your own AdSense publisher ID, then redeploy.
+# Leaving this placeholder file in place is harmless; an unapproved site serves no ads.
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
