@@ -12,9 +12,33 @@ const ICON = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable
 
 /* Global navigation. Every page links home with the exact-match anchor "dressmaker game",
    which is the rule that keeps the site from having orphan pages. */
+/* Sidebar navigation, grouped the way a guide site is browsed rather than the order pages were
+   written. Rendered on every page so the whole structure is one click away, and so no page is an
+   orphan. The current page is marked with aria-current. */
+const NAV_GROUPS = [
+  ['Start here', [
+    ['/', 'Dressmaker game'],
+    ['/how-to-play', 'How to play'],
+    ['/sewing-tips', 'Sewing tips'],
+    ['/customers', 'Customers'],
+  ]],
+  ['Reference', [
+    ['/wiki', 'Wiki and tables'],
+    ['/system-requirements', 'System requirements'],
+    ['/troubleshooting', 'Troubleshooting'],
+  ]],
+  ['Release', [
+    ['/release-date', 'Steam release date'],
+    ['/demo', 'Demo download'],
+    ['/patch-notes', 'Patch notes'],
+    ['/games-like', 'Games like Dressmaker'],
+  ]],
+];
+
+/* The strip in the header: the few pages a first-time visitor needs. */
 const NAV = [
   ['/how-to-play', 'How to Play'],
-  ['/sewing-tips', 'Sewing Tips'],
+  ['/sewing-tips', 'Tips'],
   ['/customers', 'Customers'],
   ['/wiki', 'Wiki'],
   ['/release-date', 'Release'],
@@ -47,14 +71,6 @@ const FOOT_COLS = [
   ]],
 ];
 
-function crumbsHtml(crumbs) {
-  if (!crumbs || crumbs.length < 2) return '';
-  const items = crumbs.map((c, idx) => {
-    const last = idx === crumbs.length - 1;
-    return '<li>' + (last ? '<span aria-current="page">' + c.name + '</span>' : '<a href="' + c.url + '">' + c.name + '</a>') + '</li>';
-  }).join('');
-  return '<nav class="crumbs wrap" aria-label="Breadcrumb"><ol>' + items + '</ol></nav>';
-}
 
 export function breadcrumbLd(crumbs) {
   return {
@@ -100,10 +116,35 @@ function sourcesHtml(sources) {
     '</ul></aside>';
 }
 
+
+/* The left rail. Every link is absolute and crawlable, so the sidebar doubles as the site's
+   internal linking structure rather than being decorative. */
+function sidebarHtml(current) {
+  const groups = NAV_GROUPS.map(function (entry) {
+    const title = entry[0];
+    const links = entry[1].map(function (pair) {
+      const href = pair[0];
+      const label = pair[1];
+      const active = href === current;
+      return '<li><a href="' + href + '"' + (active ? ' aria-current="page"' : '') + '>' + label + '</a></li>';
+    }).join('');
+    return '<div class="side-group"><p class="side-title">' + title + '</p><ul>' + links + '</ul></div>';
+  }).join('');
+  return '<aside class="sidebar" aria-label="Guide contents">' +
+    '<details open><summary>Guide contents</summary>' + groups + '</details></aside>';
+}
+
 /* The page head: an optional eyebrow kicker, the single H1, an optional standfirst, and the
    review date. Kept as one unit so every page starts the same way. */
 function pageHead(page) {
   const out = ['<header class="page-head">'];
+  if (page.crumbs && page.crumbs.length > 1) {
+    const items = page.crumbs.map(function (c, idx) {
+      const last = idx === page.crumbs.length - 1;
+      return '<li>' + (last ? '<span aria-current="page">' + c.name + '</span>' : '<a href="' + c.url + '">' + c.name + '</a>') + '</li>';
+    }).join('');
+    out.push('<nav class="crumbs" aria-label="Breadcrumb"><ol>' + items + '</ol></nav>');
+  }
   if (page.eyebrow) out.push('<p class="eyebrow">' + page.eyebrow + '</p>');
   out.push('<h1>' + page.h1 + '</h1>');
   if (page.lede) out.push('<p class="lede">' + page.lede + '</p>');
@@ -135,11 +176,59 @@ function tocHtml(body) {
     '</aside>';
 }
 
+
+/* FAQ schema must quote exactly what the page shows, or it is a structured-data violation. Rather
+   than asking every author to copy answers twice, the schema is rebuilt from the visible FAQ
+   section at render time. Edit the page body and the JSON-LD follows. */
+function syncFaqSchema(schema, body) {
+  const list = [].concat(schema || []);
+  const faq = list.find(function (node) { return node && node['@type'] === 'FAQPage'; });
+  if (!faq || !Array.isArray(faq.mainEntity)) return list;
+
+  const visible = new Map();
+  const lines = String(body).split('\n');
+  let inFaq = false;
+  let question = null;
+  for (const line of lines) {
+    const t = line.trim();
+    let hashes = 0;
+    while (hashes < t.length && t.charAt(hashes) === '#') hashes++;
+    const isHeading = hashes >= 2 && hashes <= 4 && t.charAt(hashes) === ' ';
+    if (isHeading && hashes === 2) {
+      inFaq = /frequently asked|^faq\b/i.test(t.slice(3).trim());
+      question = null;
+      continue;
+    }
+    if (inFaq && isHeading && hashes === 3) { question = t.slice(4).trim(); visible.set(question, []); continue; }
+    if (inFaq && question && t && !t.startsWith('|') && !t.startsWith(':::') && !t.startsWith('>')) {
+      visible.get(question).push(t);
+    }
+  }
+  /* Markdown emphasis and typographic quotes are stripped so the schema copy matches the rendered
+     text after the audit normalises both sides. */
+  const plain = function (text) {
+    return text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/\*\*/g, '')
+      .replace(/[\u2018\u2019]/g, "'")
+      .replace(/[\u201c\u201d]/g, '"')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
+  faq.mainEntity = faq.mainEntity.map(function (q) {
+    const shown = visible.get(plain(q.name));
+    if (!shown || !shown.length) return q;
+    return { '@type': 'Question', name: q.name, acceptedAnswer: { '@type': 'Answer', text: plain(shown.join(' ')) } };
+  });
+  return list;
+}
+
 export function renderPage(page) {
   const url = SITE.origin + (page.url === '/' ? '/' : page.url + '/');
   const social = (page.socialImage || (SITE.origin + '/assets/og-default.png'));
   const graph = [];
-  if (page.schema) graph.push(...[].concat(page.schema));
+  if (page.schema) graph.push(...syncFaqSchema(page.schema, page.body));
   if (page.crumbs && page.crumbs.length > 1) graph.push(breadcrumbLd(page.crumbs));
 
   /* Auto: any page with enough sections gets an on-this-page rail. A page can opt out with
@@ -166,6 +255,7 @@ export function renderPage(page) {
     '<meta name="twitter:card" content="summary_large_image">',
     '<meta name="theme-color" content="#9c3d5f">',
     '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+    '<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">',
     '<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">',
     '<link rel="stylesheet" href="/assets/styles.css">',
     '<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces.woff2" crossorigin>',
@@ -183,9 +273,10 @@ export function renderPage(page) {
       '<a class="nav-link" href="' + href + '"' + (page.url === href ? ' aria-current="page"' : '') + '>' + label + '</a>').join('') + '</nav>',
     '</div>',
     '</header>',
-    crumbsHtml(page.crumbs),
     '<main id="main">',
-    '<div class="wrap">',
+    '<div class="wrap docs">',
+    sidebarHtml(page.url),
+    '<div class="doc-main">',
     pageHead(page),
     page.facts && page.facts.length ? factsHtml(page.facts) : '',
     '<div class="layout' + (toc ? ' has-toc' : '') + '">',
@@ -194,6 +285,7 @@ export function renderPage(page) {
     page.sources && page.sources.length ? sourcesHtml(page.sources) : '',
     '</article>',
     toc,
+    '</div>',
     '</div>',
     '</div>',
     '</main>',

@@ -352,3 +352,132 @@ h2::before{opacity:1;background:var(--rose);width:34px;height:2.5px}
 .faq>li{border-bottom:1px solid var(--line-2);padding:1.2rem 0}
 .faq>li:first-child{border-top:1px solid var(--line-2)}
 .faq>li>p:last-child{margin-bottom:0}
+/* ============================================================================
+   Documentation layout - three columns, dense and scannable
+   ========================================================================= */
+:root{
+  --side-w:236px;
+  --toc-w:214px;
+  --gap:clamp(1.2rem,2.4vw,2.4rem);
+  --callout-tip:#2f6b4f;  --callout-tip-bg:#eaf4ee;  --callout-tip-line:#bcdcc8;
+  --callout-warn:#8a5a12; --callout-warn-bg:#fdf4e0; --callout-warn-line:#e8cf9d;
+  --callout-note:#31527d; --callout-note-bg:#eef3fa; --callout-note-line:#c3d4ea;
+}
+
+/* --- shell: sidebar | content | toc --------------------------------------- */
+.wrap.docs{max-width:1420px;display:grid;gap:var(--gap);align-items:start;
+  grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){
+  .wrap.docs{grid-template-columns:var(--side-w) minmax(0,1fr)}
+}
+@media (min-width:1180px){
+  .wrap.docs{grid-template-columns:var(--side-w) minmax(0,1fr) var(--toc-w)}
+}
+.doc-main{min-width:0}
+
+/* --- left sidebar --------------------------------------------------------- */
+.sidebar{font-family:var(--sans);font-size:.86rem;margin:0 0 1.2rem}
+.sidebar details{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);padding:.7rem .85rem;box-shadow:var(--sh-1)}
+.sidebar summary{cursor:pointer;font-weight:650;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);list-style:none}
+.sidebar summary::-webkit-details-marker{display:none}
+.sidebar summary::after{content:'+';float:right;color:var(--rose);font-weight:700}
+.sidebar details[open] summary::after{content:'\2013'}
+.side-group+.side-group{margin-top:1rem}
+.side-title{margin:.6rem 0 .3rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.sidebar li{margin:0}
+.sidebar a{display:block;padding:.34rem .55rem;border-radius:8px;color:var(--ink-2);border-bottom:0;border-left:2px solid transparent;line-height:1.35}
+.sidebar a:hover{background:var(--plum-soft);color:var(--plum-dark);border-left-color:var(--rose)}
+.sidebar a[aria-current=page]{background:var(--plum);color:#fff;font-weight:600;border-left-color:var(--plum-dark)}
+@media (min-width:900px){
+  .sidebar{position:sticky;top:4.6rem;margin-bottom:0}
+  .sidebar details{padding:0;border:0;background:none;box-shadow:none}
+  .sidebar summary{display:none}
+  .sidebar details{display:contents}
+  .sidebar details>.side-group:first-of-type .side-title{margin-top:0}
+}
+
+/* --- page head: compact, scannable --------------------------------------- */
+.page-head{padding:clamp(1rem,2.4vw,1.6rem) 0 .6rem;border-bottom:0;margin-bottom:.9rem}
+.crumbs{font-size:.78rem;padding:0 0 .55rem}
+.crumbs li+li::before{content:'/';color:#cbbfc6;margin-right:.4rem}
+h1{font-size:clamp(1.85rem,1.1rem + 2.6vw,2.7rem);margin:0 0 .35rem}
+.lede{font-size:clamp(1.02rem,.4vw + .95rem,1.14rem);line-height:1.6;max-width:72ch;color:var(--ink-2)}
+.eyebrow{margin-bottom:.45rem}
+.updated{margin-top:.5rem}
+
+/* --- dense fact strip ----------------------------------------------------- */
+.facts{margin-bottom:1.3rem;gap:.55rem}
+.facts li{padding:.6rem .8rem}
+.facts .k{font-size:.62rem;margin-bottom:.15rem}
+.facts .v{font-size:.85rem;line-height:1.35}
+@media (min-width:1180px){.facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* --- tighter reading rhythm: reference, not novel ------------------------- */
+.prose{max-width:none}
+.prose p,.prose li{max-width:74ch}
+.prose p{margin-bottom:.85em}
+h2{margin-top:clamp(1.7rem,3.2vw,2.5rem);margin-bottom:.45em;padding-top:.1em}
+h2::before{top:calc(-1 * clamp(.5rem,1.2vw,.9rem))}
+h3{margin-top:1.35em;margin-bottom:.3em}
+.prose,.answer,.faq,.callout,.sources,.table-wrap{max-width:100%}
+
+/* --- answer box: compact lead -------------------------------------------- */
+.answer{margin:0 0 1.3rem;padding:.95rem 1.15rem .95rem 1.5rem}
+.answer p{margin-bottom:.5em;font-size:1.02rem}
+
+/* --- steps ---------------------------------------------------------------- */
+.steps{list-style:none;counter-reset:none;margin:0 0 1.7rem;padding:0}
+.step{display:flex;gap:.9rem;position:relative;padding:0 0 1.1rem 0;margin:0;max-width:none}
+.step:not(:last-child)::before{content:'';position:absolute;left:15px;top:36px;bottom:2px;width:2px;background:var(--line)}
+.step-n{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:var(--plum);color:#fff;
+  font-family:var(--sans);font-weight:700;font-size:.86rem;display:grid;place-items:center;position:relative;z-index:1}
+.step-body{min-width:0;padding-top:.2rem}
+.step-title{font-family:var(--sans);font-weight:650;font-size:1.02rem;margin:0 0 .2em;color:var(--ink)}
+.step-body p{margin-bottom:.35em;color:var(--ink-2);font-size:.97rem}
+
+/* --- coloured callouts ---------------------------------------------------- */
+.callout{border:1px solid;border-left-width:4px;border-radius:var(--radius-sm);padding:.85rem 1.05rem;margin:0 0 1.4rem;box-shadow:var(--sh-1)}
+.callout p{margin:0;max-width:74ch}
+.callout-label{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem!important}
+.callout.tip{background:var(--callout-tip-bg);border-color:var(--callout-tip-line);border-left-color:var(--callout-tip)}
+.callout.tip .callout-label{color:var(--callout-tip)}
+.callout.warning{background:var(--callout-warn-bg);border-color:var(--callout-warn-line);border-left-color:var(--callout-warn)}
+.callout.warning .callout-label{color:var(--callout-warn)}
+.callout.note{background:var(--callout-note-bg);border-color:var(--callout-note-line);border-left-color:var(--callout-note)}
+.callout.note .callout-label{color:var(--callout-note)}
+.note{background:var(--callout-note-bg);border-color:var(--callout-note-line);border-left:4px solid var(--callout-note);padding:.85rem 1.05rem;margin-bottom:1.4rem}
+.note::before{display:none}
+
+/* --- cards ---------------------------------------------------------------- */
+.cards{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:0 0 1.7rem;padding:0;list-style:none}
+.cards li{margin:0;max-width:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:.85rem 1rem;box-shadow:var(--sh-1);height:100%}
+.card-title{font-family:var(--sans);font-weight:650;font-size:.95rem;margin:0 0 .3em;color:var(--ink)}
+.card p:last-child{margin-bottom:0}
+.card p{font-size:.9rem;color:var(--ink-2);margin-bottom:.5em}
+
+/* --- tables: the primary component on a guide site ------------------------ */
+.table-wrap{margin-bottom:1.6rem}
+table{font-size:.88rem}
+th,td{padding:.6rem .8rem}
+
+/* --- right rail ----------------------------------------------------------- */
+.toc{font-size:.84rem}
+@media (min-width:1180px){
+  .layout.has-toc{display:block}
+  .toc{position:sticky;top:4.6rem;margin:0;max-height:calc(100vh - 6rem);overflow:auto}
+  .toc details{display:contents}
+  .toc summary{display:none}
+  .toc::before{display:block}
+}
+@media (max-width:1179px){
+  .layout.has-toc{display:flex;flex-direction:column}
+  .layout.has-toc .toc{order:-1;margin:0 0 1.2rem}
+}
+
+/* --- sidebar and toc on mobile -------------------------------------------- */
+@media (max-width:899px){
+  .doc-main>.page-head{padding-top:1.2rem}
+  .sidebar{margin-bottom:1rem}
+}

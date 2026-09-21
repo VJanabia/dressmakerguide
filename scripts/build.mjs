@@ -6,7 +6,7 @@
  *
  *   node scripts/build.mjs
  */
-import { readdir, readFile, writeFile, mkdir, rm, cp, stat } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, rm, cp, stat, rename } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -78,15 +78,22 @@ async function findStale(dir, expected) {
 
 async function main() {
   const t0 = Date.now();
-  await rm(dist, { recursive: true, force: true });
-  await mkdir(dist, { recursive: true });
+  /* Build into a staging directory and swap it in. Two builds running at once - which happens when
+     several authors rebuild the same workspace - used to race on rm/mkdir and fail with ENOTEMPTY on
+     Windows. A rename is atomic, so the worst case now is one build winning and the other landing
+     on top of it, instead of a half-deleted dist. */
+  const staging = path.join(root, '.dist-staging-' + process.pid);
+  await rm(staging, { recursive: true, force: true, maxRetries: 5, retryDelay: 80 });
+  await mkdir(staging, { recursive: true });
+  const finalDist = dist;
+  const distPath = staging;
 
   const pages = await loadPages();
   const written = [];
 
   for (const page of pages) {
     const html = renderPage(page);
-    const dir = page.url === '/' ? dist : path.join(dist, page.url.replace(/^\//, ''));
+    const dir = page.url === '/' ? distPath : path.join(distPath, page.url.replace(/^\//, ''));
     await mkdir(dir, { recursive: true });
     const file = path.join(dir, 'index.html');
     await writeFile(file, html, 'utf8');
@@ -94,12 +101,12 @@ async function main() {
   }
 
   // 404 - served by Cloudflare Pages / Netlify for unknown paths.
-  await writeFile(path.join(dist, '404.html'), renderPage(notFoundPage), 'utf8');
-  written.push({ url: '/404', file: path.join(dist, '404.html'), html: renderPage(notFoundPage), page: notFoundPage });
+  await writeFile(path.join(distPath, '404.html'), renderPage(notFoundPage), 'utf8');
+  written.push({ url: '/404', file: path.join(distPath, '404.html'), html: renderPage(notFoundPage), page: notFoundPage });
 
-  await writeFile(path.join(dist, 'sitemap.xml'), sitemapXml(pages), 'utf8');
-  await writeFile(path.join(dist, 'robots.txt'), robotsTxt, 'utf8');
-  await writeFile(path.join(dist, '_headers'), [
+  await writeFile(path.join(distPath, 'sitemap.xml'), sitemapXml(pages), 'utf8');
+  await writeFile(path.join(distPath, 'robots.txt'), robotsTxt, 'utf8');
+  await writeFile(path.join(distPath, '_headers'), [
     '/*',
     '  X-Content-Type-Options: nosniff',
     '  Referrer-Policy: strict-origin-when-cross-origin',
@@ -115,10 +122,15 @@ async function main() {
   const publicEntries = await readdir(publicDir, { withFileTypes: true });
   for (const entry of publicEntries) {
     if (entry.name === 'dist') continue;
-    await cp(path.join(publicDir, entry.name), path.join(dist, entry.name), { recursive: true });
+    await cp(path.join(publicDir, entry.name), path.join(distPath, entry.name), { recursive: true });
   }
 
-  const stale = await findStale(dist, new Set(written.map((w) => w.file)));
+  // swap the finished build into place, atomically
+  await rm(finalDist, { recursive: true, force: true, maxRetries: 5, retryDelay: 80 });
+  await rename(distPath, finalDist);
+  for (const w of written) w.file = w.file.replace(distPath, finalDist);
+
+  const stale = await findStale(finalDist, new Set(written.map((w) => w.file)));
   const bytes = (await Promise.all(written.map(async (w) => (await stat(w.file)).size))).reduce((a, b) => a + b, 0);
 
   console.log('Built ' + written.length + ' HTML pages in ' + (Date.now() - t0) + 'ms (' + Math.round(bytes / 1024) + ' KB)');

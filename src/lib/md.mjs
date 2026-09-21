@@ -40,6 +40,57 @@ const cells = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').m
    blocks, which is what lets a FAQ section group each question with its own answer. */
 
 /* True for a line that starts with 2-4 hashes followed by a space. */
+
+/* ---- guide components ----------------------------------------------------
+   Beyond plain prose the pages need three structured shapes: numbered steps, coloured
+   callouts, and small card grids. All three are written in the existing Markdown subset so
+   content stays portable and nothing raw is injected. */
+
+/* "1. **Title** - body" becomes a numbered step with its own title and copy. */
+function stepsHtml(items) {
+  const parts = items.map(function (raw, idx) {
+    const m = /^\*\*([^*]+)\*\*\s*[\u2014\u2013:-]?\s*([\s\S]*)$/.exec(raw.trim());
+    const title = m ? m[1] : raw.trim();
+    const body = m ? m[2] : '';
+    return '<li class="step">' +
+      '<span class="step-n" aria-hidden="true">' + (idx + 1) + '</span>' +
+      '<div class="step-body"><p class="step-title">' + inline(title) + '</p>' +
+      (body ? '<p>' + inline(body) + '</p>' : '') + '</div></li>';
+  }).join('');
+  return '<ol class="steps">' + parts + '</ol>';
+}
+
+/* "### Card title" inside a Cards block, with the lines under it as the body. */
+function cardsHtml(lines) {
+  const cards = [];
+  let current = null;
+  for (const line of lines) {
+    const t = String(line).trim();
+    let n = 0;
+    while (n < t.length && t.charAt(n) === '#') n++;
+    if (n === 3 && t.charAt(n) === ' ') {
+      if (current) cards.push(current);
+      current = { title: t.slice(n + 1).trim(), body: [] };
+      continue;
+    }
+    if (current) current.body.push(line);
+  }
+  if (current) cards.push(current);
+  if (!cards.length) return '';
+  return '<ul class="cards">' + cards.map(function (c) {
+    const body = renderMarkdown(c.body.join('\n')).trim();
+    return '<li class="card"><p class="card-title">' + inline(c.title) + '</p>' + body + '</li>';
+  }).join('') + '</ul>';
+}
+
+/* "> Tip: ..." / "> Warning: ..." / "> Note: ..." as coloured callouts. */
+function calloutHtml(kind, text) {
+  const labels = { tip: 'Tip', warning: 'Warning', note: 'Note', info: 'Note' };
+  return '<aside class="callout ' + kind + '">' +
+    '<p class="callout-label">' + labels[kind] + '</p>' +
+    '<p>' + inline(text) + '</p></aside>';
+}
+
 function isHeadingLine(line) {
   const t = String(line).trim();
   let n = 0;
@@ -161,14 +212,22 @@ export function renderMarkdown(src) {
       while (i < lines.length && lines[i].trim().startsWith('> ')) { buf.push(lines[i].trim().slice(2)); i++; }
       const first = (buf[0] || '').replace(/\*\*/g, '');
       /* "> Short answer: ..." is the answer-first box: the direct reply a reader (or a featured
-         snippet) wants before any of the explanation. Everything else is a note callout. */
+         snippet) wants before any of the explanation. */
       if (/^short answer\s*:/i.test(first)) {
         buf[0] = buf[0].replace(/^\s*\*{0,2}short answer\s*:\*{0,2}\s*/i, '');
         html.push('<aside class="answer"><p>' + buf.map(inline).join(' ') + '</p></aside>');
         continue;
       }
-      const isWarn = /^(note|warning|heads up)/i.test(first);
-      html.push('<aside class="note' + (isWarn ? ' warn' : '') + '"><p>' + buf.map(inline).join(' ') + '</p></aside>');
+      /* Coloured callouts: tip, warning, note. A bare note keeps the neutral style. */
+      const kindMatch = /^(tip|warning|note|heads up|info)\s*:/i.exec(first);
+      if (kindMatch) {
+        const raw = kindMatch[1].toLowerCase();
+        const kind = raw === 'heads up' ? 'warning' : (raw === 'info' ? 'note' : raw);
+        buf[0] = buf[0].replace(/^\s*\*{0,2}(tip|warning|note|heads up|info)\s*:\*{0,2}\s*/i, '');
+        html.push(calloutHtml(kind === 'note' ? 'note' : kind, buf.join(' ')));
+        continue;
+      }
+      html.push('<aside class="note"><p>' + buf.map(inline).join(' ') + '</p></aside>');
       continue;
     }
 
@@ -188,6 +247,28 @@ export function renderMarkdown(src) {
         html.push(renderMarkdown(slice.body.join('\n')).trim());
       }
       i = slice.next;
+      continue;
+    }
+
+    // --- directives: ::: steps / ::: cards blocks ---
+    const directive = /^:::\s*([a-z]+)\s*$/.exec(trimmed);
+    if (directive) {
+      const name = directive[1];
+      const body = [];
+      i++;
+      while (i < lines.length && !/^:::\s*$/.test(lines[i].trim())) { body.push(lines[i]); i++; }
+      i++; // consume the closing :::
+      flushAll();
+      if (name === 'steps') {
+        const items = [];
+        for (const line of body) {
+          const m = /^(?:\d+\.|[-*])\s+(.*)$/.exec(String(line).trim());
+          if (m) items.push(m[1]);
+        }
+        if (items.length) html.push(stepsHtml(items));
+      } else if (name === 'cards') {
+        html.push(cardsHtml(body));
+      }
       continue;
     }
 

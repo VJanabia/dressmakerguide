@@ -33,9 +33,27 @@ test('the answer box renders from a Short answer blockquote', () => {
   check('the price survives', html.includes('$14.99'), html);
 });
 
-test('a note stays a note', () => {
-  const html = renderMarkdown('> Note: costs **$14.99**.');
-  check('renders as .note', html.includes('<aside class="note'), html);
+test('callout kinds render with their own class', () => {
+  const tip = renderMarkdown('> Tip: preview before you cut.');
+  check('tip renders as .callout.tip', tip.includes('class="callout tip"'), tip);
+  const warn = renderMarkdown('> Warning: cutting is permanent.');
+  check('warning renders as .callout.warning', warn.includes('class="callout warning"'), warn);
+  check('the label is visible text', warn.includes('>Warning<'), warn);
+  const note = renderMarkdown('> Note: costs **$14.99**.');
+  check('note renders as .callout.note', note.includes('class="callout note"'), note);
+  check('the price survives inside a callout', note.includes('$14.99'), note);
+});
+
+test('steps and cards render from directives', () => {
+  const steps = renderMarkdown(['::: steps', '1. **Read the brief** — occasion and budget.', '2. **Cut the cloth** - no undo.', ':::'].join('\n'));
+  check('renders an ol.steps', steps.includes('<ol class="steps">'), steps);
+  check('two steps', (steps.match(/class="step"/g) || []).length === 2, steps);
+  check('step titles are lifted out', steps.includes('<p class="step-title">Read the brief</p>'), steps);
+  check('numbers are rendered', steps.includes('>1</span>') && steps.includes('>2</span>'), steps);
+  const cards = renderMarkdown(['::: cards', '### Cotton', 'Cheap and forgiving.', '### Silk', 'Expensive and unforgiving.', ':::'].join('\n'));
+  check('renders a card list', cards.includes('<ul class="cards">'), cards);
+  check('two cards', (cards.match(/class="card"/g) || []).length === 2, cards);
+  check('card titles are lifted out', cards.includes('<p class="card-title">Cotton</p>'), cards);
 });
 
 test('figures carry a visible caption', () => {

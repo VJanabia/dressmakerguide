@@ -61,6 +61,9 @@ for (const file of files) {
   const links = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((m) => m[1]);
 
   if (/name="keywords"/i.test(html)) problems.push(url + ': contains a keywords meta tag (forbidden)');
+  /* An escaped entity written into page copy survives escaping and shows up as literal text, which
+     is what happened when a page used &#34; as a quotation mark. */
+  if (/&#(?:3[49]|quot|amp|lt|gt);/.test(bodyText)) problems.push(url + ': a literal HTML entity is visible in the text');
   if (h1s.length !== 1) problems.push(url + ': expected exactly 1 H1, found ' + h1s.length);
   if (!title) problems.push(url + ': missing title');
   if (!desc) problems.push(url + ': missing meta description');
