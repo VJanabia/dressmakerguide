@@ -6,6 +6,8 @@ published by Free Lives under the Cozy Lives label. Steam App ID 4019220.
 
 Unofficial. Not affiliated with the developers. See `/disclaimer`.
 
+Repository: https://github.com/VJanabia/dressmakerguide - live at https://dressmakerguide.com
+
 ---
 
 ## Why it is built this way
