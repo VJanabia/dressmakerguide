@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -14,6 +14,7 @@ const BODY = [
   "Announcements and milestones from April 15, 2026 to launch day, dated by the Steam news hub.",
   "### September 21, 2026 — Launch day, and no patch yet",
   "Out on Windows and macOS at **$14.99**, or **$13.49** at 10% off. The day's only post was the launch announcement: small fixes promised soon, then a challenge mode, transparent fabrics, controller support and mobile and Switch ports. Source: [Steam news hub](@LINK_news@).",
+  "![X](@SHOT_finished@ What the whole log leads to: a finished gown on the mannequin, with photo mode open to frame the shot.)",
   "### September 7, 2026 — Scalding September Tea: the price",
   "Two weeks out, the developers said the number: **$14.99**, regional pricing, **-10% launch discount**. The post ruled out microtransactions, ads, data harvesting and generative AI, and counted **35 hours** of story commissions, **150 dress pieces**, **450 fabrics** and **350 accessories**. Source: [price announcement on itch.io](@LINK_price@).",
   "### August 31, 2026 — August Tea: content complete",
@@ -46,18 +47,20 @@ const BODY = [
   "Keyboard sewing controls arrived on SPACE and the arrow keys, with a more forgiving sewing line, and the newspaper and panel glitches were fixed. Source: [itch.io devlog](@LINK_devlog@).",
   "### September 5, 2025 — Greenlit, and a sketchbook preview",
   "A sketchbook preview appeared beside the cutting table, and Free Lives confirmed it had greenlit the full game. Source: [itch.io devlog](@LINK_devlog@).",
+  "![X](@SHOT_sketch@ The September 5 preview put the sketchbook beside the cutting table, where a written brief becomes pattern pieces.)",
   "### September 2 and 3, 2025 — Patches 0.4.1 and 0.4.2",
   "Two patches in two days: incorrect scoring and the end-of-prototype shop fixed, then an emergency fix for the fourth dress, the one that needs bows. Source: [itch.io devlog](@LINK_devlog@).",
   "### September 1, 2025 — Big update, and some mixed news",
   "Buttons and bows after sewing, a pageable history of your dresses, panel-by-panel colouring, and a new character with two quests. Source: [itch.io devlog](@LINK_devlog@).",
   "### August 4, 2025 — The first patch",
   "The oldest post on the devlog: Reset Save now reset your save, sewing became more forgiving, and the confetti audio was made less jarring. Source: [itch.io devlog](@LINK_devlog@).",
+  "![X](@SHOT_sew@ Sewing became more forgiving in the very first patch; panels still go through the machine one seam at a time.)",
   "## Where the next patch will show up",
   "Steam news hub first. The itch.io devlog records the prototype only, and its newest build is still 0.5.5.",
   "> Note: no patch for the released Steam build has been published yet. The launch post promises small fixes plus new fabrics and accessories soon.",
   "Something broken? The [Dressmaker troubleshooting](/troubleshooting) page covers the common ones. For the launch itself, see [Dressmaker release date](/release-date); for the free prototype, see the [Dressmaker demo](/demo) page.",
 ].join("\n\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_news@', LINKS.steamNews)
   .replaceAll('@LINK_devlog@', LINKS.itchDevlog)
   .replaceAll('@LINK_price@', LINKS.itchPricePost)

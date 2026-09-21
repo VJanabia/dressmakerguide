@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -7,6 +7,8 @@ const BODY = [
   "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ Hand-in is the moment the commission was for.)",
   "",
   "Dressmaker is a hand-drawn 2D crafting sim, not a 3D world, so the [dressmaker game](/) asks for very little.",
+  "",
+  "![x](@SHOT_finished@ What those specs have to run: a hand-drawn 2D dressmaking sim, not a 3D world.)",
   "",
   "## Official Dressmaker system requirements",
   "",
@@ -76,11 +78,15 @@ const BODY = [
   "",
   "Steam compresses what it sends, so the download is about a third of the installed size.",
   "",
+  "![x](@SHOT_fabric@ Cloth is sold by the bolt and the metre, disk space by the GiB — and both are smaller than they sound.)",
+  "",
   "> Note: the **free prototype is a bigger download than the full game**. The 0.5.5 zips on itch.io are 115 MB for Windows, 127 MB for Linux and 128 MB for macOS - a separate build with its own Linux version, so it says nothing about the released game.",
   "",
   "## If Dressmaker stutters or will not start",
   "",
   "Work through these in order. The first two fix most problems.",
+  "",
+  "![x](@SHOT_sew@ What a stutter is actually rendering: fabric through the sewing machine with the stitch prompts on screen.)",
   "",
   "::: steps",
   "1. **Close background apps** — browsers, Discord overlays and cloud-sync clients all take a slice of the same 8 GB.",
@@ -98,7 +104,7 @@ const BODY = [
   "",
   "**Trust Steam over this page.** If the two disagree, Steam is right.",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam)
   .replaceAll('@LINK_steamdb@', LINKS.steamDb);
 

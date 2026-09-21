@@ -1,10 +1,12 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const SHOT_cut = SHOTS.cut.src;
 
 const BODY = [
   "> Short answer: If you want the feeling of Dressmaker without the dressmaking, start with **Unpacking**, **A Little to the Left** or **Wilmot's Warehouse** for tactile organising, and **Calico** or **Strange Horticulture** for cozy making with a shop attached. None of them replace Dressmaker's fabric-layout mechanic, which is the part that is genuinely unusual.",
+  "",
+  "![a finished gown on the mannequin with photo mode open](@SHOT_finished@ The payoff this whole list is chasing: one beautiful thing, finished on the mannequin, photo mode open.)",
   "",
   "Most cozy lists hand you farming sims and shop-management games. Dressmaker is neither: the [dressmaker game](/) is about making one beautiful thing with your hands, and the shop is scaffolding around that.",
   "",
@@ -94,7 +96,7 @@ const BODY = [
   "",
   "Every Steam link on this page goes to that game's own store listing, and each platform list comes from the same listing. Dressmaker itself is a Windows and macOS release on [Steam](@LINK_steam@)."
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam);
 
 export const page = {

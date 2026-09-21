@@ -481,3 +481,12 @@ th,td{padding:.6rem .8rem}
   .doc-main>.page-head{padding-top:1.2rem}
   .sidebar{margin-bottom:1rem}
 }
+
+/* --- figures: reserve the true box, never stretch ------------------------- */
+figure img{width:100%;height:auto;aspect-ratio:1100 / 619;object-fit:cover;background:var(--paper-2)}
+@media (min-width:1180px){figure{max-width:100%}}
+
+/* two screenshots side by side where a section has a pair */
+.shots{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:0 0 1.6rem}
+.shots figure{margin:0}
+.shots figcaption{font-size:var(--t-xs)}

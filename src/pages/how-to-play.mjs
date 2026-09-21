@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const SHOT_cut = SHOTS.cut.src;
@@ -18,6 +18,8 @@ const BODY = [
   "| Layout and cutting | Grain or bias, and piece placement | A permanent mark on the dress |",
   "| Sewing | Seam order and alignment | Panels that fit together badly |",
   "| Decorating | Buttons, bows, appliqué, lace | Trim that buries the fabric |",
+  "",
+  "![Dressmaker screenshot](@SHOT_sketch@ Every commission starts in the sketchbook: the brief, the samples and the pattern choices in one place.)",
   "",
   "## The first five minutes",
   "",
@@ -65,6 +67,8 @@ const BODY = [
   "| Print scale | A large print is chopped up the moment you cut a bodice |",
   "| Cost | No price list exists; the bolt you buy is the bolt you must make work |",
   "| Panels | You pick the fabric for each panel: a cotton bodice, a silk skirt |",
+  "",
+  "![Dressmaker screenshot](@SHOT_fabric@ Bolt by bolt: prints, prices and the commission limits the customer set.)",
   "",
   "## Pattern layout: grain, bias and the preview",
   "",
@@ -119,6 +123,8 @@ const BODY = [
   "",
   "One official hand-in line reads: \"Oh, how wonderful. This is MY dress, exactly as I wanted it.\"",
   "",
+  "![Dressmaker screenshot](@SHOT_hero@ Hand-in is the moment the whole commission was for: the customer reacts in her own words.)",
+  "",
   "> Note: coin and reputation are the feedback loop. No coin table, reputation threshold or star formula has ever been published.",
   "",
   "## How your dress is scored",
@@ -155,7 +161,7 @@ const BODY = [
   "",
   "Start on the [dressmaker game](/) homepage. [Dressmaker sewing tips](/sewing-tips) covers seam order and grain, [customer preferences](/customers) covers reading a brief, and the [Dressmaker wiki](/wiki) is the reference tab. Test the loop free on the [itch.io prototype](/demo)."
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam);
 
 export const page = {

@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -16,6 +16,8 @@ const BODY = [
   "| Hard rules | Fabric shop, as a constraint line | \"Use only black\" |",
   "",
   "The developers publish no client roster and no preference score, so the rest is your read of the person. New here? Start with the [dressmaker game](/) overview.",
+  "",
+  "![The sketchbook open on a customer note](@SHOT_sketch@ The sketchbook open on a customer note, with the requirements beside the pattern choices.)",
   "",
   "## Occasion first, taste second",
   "",
@@ -72,6 +74,8 @@ const BODY = [
   "",
   "Reputation thresholds are unpublished. Off-rack dresses are the steadier half of the economy, with roughly **35 hours** of story commissions besides.",
   "",
+  "![A finished dress with the commission completion options](@SHOT_shop@ A finished dress with the completion options: hand it in, keep working, or sell it off the rack.)",
+  "",
   "## Playing the sabotage run on purpose",
   "",
   "[The official Steam page](@LINK_steam@) invites you to \"satisfy (or sabotage!)\" the townsfolk. The feedback is a person, not a scoreboard.",
@@ -119,7 +123,7 @@ const BODY = [
   "",
   "Start with the [how to play Dressmaker](/how-to-play) walkthrough, then the [Dressmaker sewing tips](/sewing-tips), the [Dressmaker wiki](/wiki) reference tables and the [Dressmaker Steam release date](/release-date).",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam);
 
 // Same answers as the FAQ section in the body, in the shape the FAQPage schema wants.

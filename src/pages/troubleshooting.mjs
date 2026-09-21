@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -46,6 +46,8 @@ const BODY = [
   "",
   "No recommended tier is published: [Dressmaker system requirements](/system-requirements).",
   "",
+  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@ The machine and its on-screen stitch prompts: if frames drop mid-seam, go windowed and drop a resolution step.)",
+  "",
   "## 3. The macOS warning",
   "",
   "The itch.io prototype is not notarized, so macOS blocks it as unverified.",
@@ -86,6 +88,8 @@ const BODY = [
   "## 6. Saves and Steam Cloud",
   "",
   "Steam Cloud is listed, so progress should follow your account.",
+  "",
+  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_shop@ The end-of-commission choice — hand in, keep working or sell — is the progress a reinstall can overwrite.)",
   "",
   "| Question | Honest answer |",
   "| --- | --- |",
@@ -153,7 +157,7 @@ const BODY = [
   "",
   "Heuristic scanners sometimes quarantine files from small studios. Check your protection history, restore them and exclude your Steam library.",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_discussions@', LINKS.steamDiscussions)
   .replaceAll('@LINK_itch@', LINKS.itch);
 

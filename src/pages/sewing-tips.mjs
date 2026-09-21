@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { SITE, LINKS } from '../data/site.mjs';
 
 const SHOT_cut = SHOTS.cut.src;
@@ -81,6 +81,8 @@ const BODY = [
   "",
   "## Seam order",
   "",
+  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@ One seam at a time: panels go through the machine with the stitch prompts on screen.)",
+  "",
   "Sew in an order that keeps the fiddly work flat.",
   "",
   "::: steps",
@@ -136,6 +138,8 @@ const BODY = [
   "",
   "Coin buys the next bolt; reputation is what the town remembers.",
   "",
+  "![Fabric shop shelves stacked with cloth bolts beside a list of fabrics and prices](@SHOT_fabric@ The shelves and their prices: practise on cheap cotton and spend on the bolt the customer will notice.)",
+  "",
   "> Tip: while you are learning, buy the cheapest cloth that fits the brief.",
   "",
   "> Note: fabric prices, coin amounts and reputation thresholds are not published.",
@@ -156,7 +160,7 @@ const BODY = [
   "",
   "Dressmaker rewards workroom habits: plan the cut, respect the grain, spend cloth where it shows. The [Dressmaker wiki](/wiki) holds the reference tables, the [dressmaker game](/) homepage covers the release and the free prototype, and [games like Dressmaker](/games-like) is next.",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINK_steam);
 
 export const page = {

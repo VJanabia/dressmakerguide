@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -17,7 +17,7 @@ const BODY = [
   "| Story | No length published | About 35 hours of commissions, a town, an ending |",
   "| Pick it if | You want to test the craft for free | You want the actual game |",
   "",
-  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_itch@ Hand the dress in, keep working on it, or sell it instead of delivering the commission.)",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ The same loop runs in both builds: lay out the pattern, cut the cloth, sew, decorate, hand in.)",
   "",
   "## Where the free Dressmaker download is",
   "",
@@ -41,6 +41,8 @@ const BODY = [
   "5. **Unzip it somewhere you will find again** — not in the zip preview.",
   "6. **Run the game** — on a Mac there is one extra step, and it is next.",
   ":::",
+  "",
+  "![A green off-the-shoulder dress on a mannequin with the commission completion options](@SHOT_shop@ Hand the dress in, keep working on it, or sell it instead of delivering the commission.)",
   "",
   "## The macOS warning, and the official fix",
   "",
@@ -67,6 +69,8 @@ const BODY = [
   "| The 2025 itch.io project, still labelled \"Prototype\" | The content-complete September 2026 launch build |",
   "| Free, on Windows, macOS and Linux | Achievements, an ending, Steam Cloud, the town of clients |",
   "| \"A lot of unfinished seams\", per the developers | The full wardrobe of dress pieces, fabrics and accessories |",
+  "",
+  "![A purple floral gown with lace tiers on a mannequin in photo mode](@SHOT_finished@ The payoff the prototype still delivers: a finished dress on the mannequin, ready for photo mode.)",
   "",
   "### It is not a Steam demo",
   "",
@@ -132,7 +136,7 @@ const BODY = [
   "",
   "Start with [Dressmaker troubleshooting](/troubleshooting). On macOS the notarization warning is expected. The team also links its Discord from the itch page.",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_itch@', LINKS.itch)
   .replaceAll('@LINK_itchDownload@', LINKS.itchDownload);
 

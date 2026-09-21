@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const SHOT_hero = SHOTS.hero.src;
@@ -64,6 +64,8 @@ const BODY = [
   "",
   "The September 7, 2026 devlog post “Scalding September Tea: Price announcement” stated **“$14.99, with regional pricing, and a -10% launch discount.”**",
   "",
+  "![Fabric shop shelves stacked with cloth bolts beside a list of fabrics and prices](@SHOT_fabric@ Bolts, cloth and accessories are all inside the one Steam price: no fabric packs and no store extras.)",
+  "",
   "| Context | Price | Notes |\n| --- | --- | --- |\n| US Steam price | **$14.99** | Full price after the launch window |\n| Launch discount | **$13.49** | 10% off, time limited |\n| Regional pricing | Set per region | Not a currency conversion |\n| itch.io prototype | Free | Name your own price, and it stays free |\n| Bundles | **-10%** | Town to City and Paralives, each |",
   "",
   "> Note: prices change and discount windows close. These figures were verified on September 21, 2026 — check the [live price on Steam](@LINK_steam@).",
@@ -71,6 +73,8 @@ const BODY = [
   "## What you get for $14.99",
   "",
   "One purchase, no store extras.",
+  "",
+  "![A purple floral gown with lace tiers displayed on a mannequin in photo mode](@SHOT_finished@ What $14.99 buys: a gown like this one, framed in photo mode at the end of a story commission.)",
   "",
   "::: cards",
   "### About 35 hours of story commissions",
@@ -125,7 +129,7 @@ const BODY = [
   "",
   FAQ_BODY
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam)
   .replaceAll('@LINK_news@', LINKS.steamNews)
   .replaceAll('@LINK_devlog@', LINKS.itchDevlog)

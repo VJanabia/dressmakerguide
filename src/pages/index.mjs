@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { SHOTS, resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const SHOT_hero = SHOTS.hero.src;
@@ -37,7 +37,7 @@ const BODY = [
   "The official pitch invites you to satisfy **or sabotage** your customers. Send the mayor's daughter out in clashing velvet if you like.",
   ":::",
   "",
-  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ A finished dress always ends with a customer reaction.)",
+  "![A purple floral gown with lace tiers displayed on a mannequin in photo mode](@SHOT_finished@ Where all of this ends: a finished gown on the mannequin, with photo mode open to frame the shot.)",
   "",
   "## The loop, in five stages",
   "",
@@ -53,6 +53,8 @@ const BODY = [
   "",
   "> Warning: cutting is the point of no return. Fabric is spent the moment the shears go through it.",
   "",
+  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@ Stage four up close: the panels go through the machine one seam at a time, with the controls on screen.)",
+  "",
   "## How your dress is scored",
   "",
   "A commission is not judged on vibes. The sketchbook lists **named attributes with numeric targets**, and your dress is measured against them.",
@@ -67,6 +69,8 @@ const BODY = [
   "",
   "The developers have never published the full attribute list, so expect names to vary by client. [Customer preferences](/customers) covers how to read a brief.",
   "",
+  "![The sketchbook open on a customer note with dress requirements and pattern choices](@SHOT_sketch@ The sketchbook is where the brief and its numeric targets live before any cloth is cut.)",
+  "",
   "## Demo and download",
   "",
   "Two different downloads, and it matters which one you want.",
@@ -80,6 +84,8 @@ const BODY = [
   "| Why pick it | To test the cutting and sewing loop for free | To play the actual game |",
   "",
   "The prototype is **not** a Steam demo. It is a separate, older build. The [Dressmaker demo and download](/demo) page has the direct link and the macOS Gatekeeper fix.",
+  "",
+  "![Paper pattern pieces laid out on strawberry-print fabric with shears resting on the cloth](@SHOT_cut@ The free prototype is where you can lay out a pattern and cut it before paying for the full game.)",
   "",
   "## Release details",
   "",
@@ -116,6 +122,8 @@ const BODY = [
   "| A dress sold off the rack | Steady coin, with nobody's wedding depending on it |",
   "",
   "Reputation opens better commissions. The [Dressmaker customer preferences](/customers) page covers reading a brief and playing the sabotage run on purpose.",
+  "",
+  "![A customer in the fitting room reading the dress she was handed in](@SHOT_hero@ A finished dress always ends with a customer reaction.)",
   "",
   "## System requirements",
   "",
@@ -187,6 +195,7 @@ const BODY = [
   "",
   "Buy it on **Steam** for Windows and macOS, or try the free prototype at **elyaradine.itch.io/dressmaker**. Both links go to the developers' own pages.",
 ].join("\n")
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam)
   .replaceAll('@LINK_itch@', LINKS.itch);
 

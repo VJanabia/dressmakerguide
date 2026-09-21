@@ -64,6 +64,9 @@ for (const file of files) {
   /* An escaped entity written into page copy survives escaping and shows up as literal text, which
      is what happened when a page used &#34; as a quotation mark. */
   if (/&#(?:3[49]|quot|amp|lt|gt);/.test(bodyText)) problems.push(url + ': a literal HTML entity is visible in the text');
+  /* Two figures back to back read as padding, and a picture the reader cannot place is worse than
+     no picture at all. */
+  if (/<\/figure>\s*<figure>/.test(html)) notes.push(url + ': two figures are adjacent with no text between them');
   if (h1s.length !== 1) problems.push(url + ': expected exactly 1 H1, found ' + h1s.length);
   if (!title) problems.push(url + ': missing title');
   if (!desc) problems.push(url + ': missing meta description');

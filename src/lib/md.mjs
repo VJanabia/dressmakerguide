@@ -15,7 +15,7 @@ const IMAGE = /!\[([^\]]*)\]\((\S+?)(?:\s+([^)]*?))?\)/;
 
 function inline(text) {
   let out = esc(text);
-  out = out.replace(IMAGE, (m, alt, src) => '<img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async" width="600" height="337">');
+  out = out.replace(IMAGE, (m, alt, src) => imgTag(src, alt));
   out = out.replace(/\[([^\]]+)\]\((\S+?)\)/g,
     (m, label, href) => {
       const external = /^https?:\/\//.test(href);
@@ -89,6 +89,25 @@ function calloutHtml(kind, text) {
   return '<aside class="callout ' + kind + '">' +
     '<p class="callout-label">' + labels[kind] + '</p>' +
     '<p>' + inline(text) + '</p></aside>';
+}
+
+
+/* Screenshots are 1100x619, i.e. 16:9 to within a pixel. The attributes must state the TRUE ratio:
+   a wrong pair (600x337 is 1.7804 against the real 1.7771) makes the browser reserve a slightly
+   wrong box and stretch the picture to fill it. A srcset at half width keeps the image crisp where
+   the column is narrower than the source, and the browser can still pick the wide one on retina. */
+function imgTag(src, alt) {
+  const isShot = /\/assets\/shots\//.test(src);
+  const base = src.replace(/\.webp$/, '');
+  /* Two widths so the browser can choose: the column is 828px on a wide screen, so the 550px file
+     is enough for most readers and the 1100px one covers retina without upscaling. */
+  const srcset = isShot
+    ? ' srcset="' + base + '-550.webp 550w, ' + base + '-1100.webp 1100w"' +
+      ' sizes="(min-width: 1180px) 828px, (min-width: 900px) 60vw, 92vw"'
+    : '';
+  // The aspect ratio is stated exactly (1100x619). A mismatched pair stretches the picture to fill.
+  return '<img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async"' +
+    (isShot ? ' width="1100" height="619"' : '') + srcset + '>';
 }
 
 function isHeadingLine(line) {
@@ -165,8 +184,7 @@ export function renderMarkdown(src) {
     const lone = new RegExp('^' + IMAGE.source + '$').exec(joined.trim());
     if (lone) {
       const [, alt, src, caption] = lone;
-      html.push('<figure>' +
-        '<img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async" width="1100" height="619">' +
+      html.push('<figure>' + imgTag(src, alt) +
         (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
         '</figure>');
     } else {

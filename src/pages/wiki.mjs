@@ -1,4 +1,4 @@
-import { SHOTS, resolveShots } from '../data/images.mjs';
+import { resolveFigures } from '../data/images.mjs';
 import { LINKS } from '../data/site.mjs';
 
 const BODY = [
@@ -32,6 +32,8 @@ const BODY = [
   "",
   "> Tip: the last row is a family, not a bolt. We can tell you how cotton behaves, not that bolt 217 runs heavy.",
   "",
+  "![Fabric shop shelves stacked with cloth bolts beside a list of fabrics and prices](@SHOT_fabric@ Bolt by bolt: prints, prices and the limits of the commission you are dressing for.)",
+  "",
   "## Pattern pieces and garment panels",
   "",
   "A dress is assembled from pattern pieces you arrange, cut and sew: 'how you choose to arrange and cut out your fabric is what appears on the final dress.'",
@@ -60,6 +62,8 @@ const BODY = [
   "| **Appliqué** | Shaped fabric placed on the surface | Motifs on a skirt, or across a bodice |",
   "| **Lace trim** | Edging for borders, hems and seams | Any line worth following: a hem, a cuff, a panel edge |",
   "",
+  "![A finished strawberry-print dress on a mannequin beside a tray of accessories](@SHOT_decorate@ Sewing finished, decorating not: buttons, bows and lace can still be added before you hand it over.)",
+  "",
   "## The making loop, in reference form",
   "",
   "Six stages, in the order the game asks for them. Dressmaker runs on two currencies, **coin and reputation**.",
@@ -74,6 +78,8 @@ const BODY = [
   "| **6. Hand in, or sell off the rack** | Turn the dress in, or sell pre-made dresses | Nothing up front — coin and reputation come back here |",
   "",
   "Handing in earns coin and reputation. What reputation unlocks, and in what order, has not been published. The [customer preferences](/customers) page covers reading the brief.",
+  "",
+  "![Fabric being fed through a sewing machine with the stitch prompts shown on screen](@SHOT_sew@ Panels go through the machine one seam at a time, with the controls on screen as you go.)",
   "",
   "## Key terms",
   "",
@@ -97,7 +103,7 @@ const BODY = [
   "",
   "Something wrong or out of date? [Tell us](/contact). To start playing instead, read [how to play Dressmaker](/how-to-play), then the [sewing tips](/sewing-tips) and [system requirements](/system-requirements).",
 ].join("\n")
-  .split('\n').map((line) => resolveShots(line)).join('\n')
+  .split('\n').map((line) => resolveFigures(line)).join('\n')
   .replaceAll('@LINK_steam@', LINKS.steam)
   .replaceAll('@LINK_devlog@', LINKS.itchDevlog);
 
