@@ -81,7 +81,8 @@ hr{border:0;border-top:1px solid var(--line);margin:2.4em 0}
 .site-head{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line-2)}
 .site-head .wrap{display:flex;align-items:center;gap:1rem;min-height:68px;flex-wrap:wrap;padding-top:.5rem;padding-bottom:.5rem}
 .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:700;font-size:1.16rem;letter-spacing:-.015em;color:var(--ink)}
-.brand .mark{width:34px;height:34px;flex:0 0 34px;border-radius:10px;box-shadow:var(--sh-1)}
+.brand .mark{width:34px;height:34px;flex:0 0 34px;border-radius:8px;object-fit:cover;
+  background:#fff;box-shadow:var(--sh-1)}
 .brand small{display:block;font-family:var(--sans);font-weight:600;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}
 .site-nav{margin-left:auto;display:flex;gap:.15rem;flex-wrap:wrap}
 .nav-link{font-family:var(--sans);font-size:.83rem;font-weight:550;color:var(--ink-2);padding:.5rem .7rem;border-radius:var(--radius-pill);letter-spacing:-.005em;transition:background .16s,color .16s}

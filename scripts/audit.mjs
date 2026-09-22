@@ -87,8 +87,14 @@ for (const file of files) {
   if (desc.length > 155 && !AUDIT_EXEMPT.has(url)) notes.push(url + ': description is ' + desc.length + ' chars (target <= 155)');
   if (!canonical) problems.push(url + ': missing canonical');
   for (const img of imgs) {
-    if (!/\balt="/.test(img)) problems.push(url + ': image without alt -> ' + img.slice(0, 90));
-    if (!/loading="lazy"/.test(img) && !/fetchpriority="high"/.test(img)) notes.push(url + ': image not lazy loaded -> ' + img.slice(0, 70));
+    /* alt="" is correct for a decorative image - an icon sitting beside its own text label. A
+       missing alt attribute is the real accessibility bug, so that is what this checks. */
+    if (!/\balt=/.test(img)) problems.push(url + ': image without an alt attribute -> ' + img.slice(0, 90));
+    /* The header mark is above the fold on every page, so it must not be lazy loaded and must not
+       carry a loading hint of any kind. */
+    if (!/loading="lazy"/.test(img) && !/fetchpriority="high"/.test(img) && !/class="mark"/.test(img)) {
+      notes.push(url + ': image not lazy loaded -> ' + img.slice(0, 70));
+    }
 
     /* The alt text in page copy and the alt text in the registry must agree, otherwise a figure
        silently describes the wrong screenshot - which is exactly what happened the first time the

@@ -3,12 +3,10 @@ import { renderMarkdown } from './md.mjs';
 
 const escAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-/* The site mark: a dress form over a stitch line. Ours, not the developers' logo. */
-const ICON = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">' +
-  '<rect width="32" height="32" rx="9" fill="#7d2b4a"/>' +
-  '<path fill="#fff" d="M16 5.5 9.5 10v3.4l6.5-2.5 6.5 2.5V10z"/>' +
-  '<path fill="none" stroke="#f0c3d3" stroke-width="1.6" stroke-dasharray="2.4 2.4" stroke-linecap="round" d="M6 20.5h20"/>' +
-  '<path fill="#f0c3d3" d="M9.5 23h13l2.2 4.5H7.3z"/></svg>';
+/* The site mark: the dress artwork from assets-source/dress.jpg, scaled by scripts/make-icons.py.
+   Decorative, so the alt is empty - the site name sits next to it as text. */
+const ICON = '<img class="mark" src="/assets/dress-96.webp" srcset="/assets/dress-96.webp 1x, /assets/dress-192.webp 2x" ' +
+  'width="34" height="34" alt="" decoding="async">';
 
 /* Global navigation. Every page links home with the exact-match anchor "dressmaker game",
    which is the rule that keeps the site from having orphan pages. */
@@ -254,7 +252,6 @@ export function renderPage(page) {
     '<meta property="og:image" content="' + social + '">',
     '<meta name="twitter:card" content="summary_large_image">',
     '<meta name="theme-color" content="#7d2b4a">',
-    '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
     '<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">',
     '<link rel="icon" href="/assets/favicon-16.png" sizes="16x16" type="image/png">',
     '<link rel="icon" href="/assets/favicon-48.png" sizes="48x48" type="image/png">',
