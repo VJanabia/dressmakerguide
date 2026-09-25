@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/assets/styles.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter.woff2" crossorigin>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9073496682747119" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dressmakerguide.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://dressmakerguide.com/contact/"}]}</script>
 </head>
 <body>
@@ -49,6 +50,7 @@
 <h2 id="email">Email</h2>
 <p><strong>hello@dressmakerguide.com</strong></p>
 <p>We read everything. We answer most things within a few days, and we answer corrections faster than anything else because a wrong fact on a guide page costs readers real money or real time.</p>
+<aside class="ad-slot" data-ad-fit="468" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><script>atOptions = { "key" : "3bfd5956c4fad25498ca50e62ef7dcca", "format" : "iframe", "height" : 60, "width" : 468, "params" : {} };</script><script src="https://www.highrevenueformat.com/3bfd5956c4fad25498ca50e62ef7dcca/invoke.js"></script></div></aside>
 <h2 id="what-to-write-to-us-about">What to write to us about</h2>
 <ul><li><strong>A correction.</strong> A price, a date, a spec or a patch note that is wrong or out of date. If you can, include the page URL and the official source that contradicts us.</li><li><strong>A broken link.</strong> Download links and store links rot faster than anything else on a game site.</li><li><strong>Something you found in the game that we have not covered.</strong> A fabric behaviour worth adding to the <a href="/wiki">wiki</a>, a customer pattern worth writing up on the <a href="/customers">customers</a> page, or a trick that saved you a bolt of silk.</li><li><strong>A question about the game.</strong> We answer guide questions by email and, when a question comes up repeatedly, we turn it into a section on the <a href="/how-to-play">how to play</a> or <a href="/troubleshooting">troubleshooting</a> page.</li><li><strong>A privacy or legal request.</strong> See the <a href="/privacy">privacy policy</a> for what we can and cannot do.</li></ul>
 <h2 id="what-we-cannot-help-with">What we cannot help with</h2>
@@ -56,9 +58,11 @@
 <h2 id="before-you-write">Before you write</h2>
 <p>A few things that let us fix issues in one pass instead of three:</p>
 <ol><li>The exact page URL.</li><li>The sentence or number that is wrong.</li><li>A link to the official source - the Steam page, an official announcement, or the itch.io devlog - that shows the correct version.</li><li>Your platform, if the issue is technical.</li></ol>
+<aside class="ad-slot" data-ad-fit="320" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><script>atOptions = { "key" : "9f809a88800c18b0d09bd3c33ac1e2eb", "format" : "iframe", "height" : 50, "width" : 320, "params" : {} };</script><script src="https://www.highrevenueformat.com/9f809a88800c18b0d09bd3c33ac1e2eb/invoke.js"></script></div></aside>
 <h2 id="response-times">Response times</h2>
 <p>There is no support team, so please do not expect a reply in minutes. Corrections to factual errors are treated as urgent. Feature requests and suggestions are read, logged, and often turn up on the site later without a reply - that is not you being ignored.</p>
 <aside class="callout note"><p class="callout-label">Note</p><p>email sent to this address may be kept briefly so we can fix the issue you reported, then deleted. We do not run a newsletter and we will not add you to anything. See the <a href="/privacy">privacy policy</a>.</p></aside>
+<aside class="ad-slot ad-slot-push" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><div id="container-86858e1a8992e8258ee330ca2817c8c5"></div></div><script async data-cfasync="false" src="https://pl31505864.profitableratecpmnetwork.com/86858e1a8992e8258ee330ca2817c8c5/invoke.js"></script></aside>
 </article>
 <aside class="toc" aria-label="On this page"><details><summary>On this page</summary><nav><ol><li><a href="#email">Email</a></li><li><a href="#what-to-write-to-us-about">What to write to us about</a></li><li><a href="#what-we-cannot-help-with">What we cannot help with</a></li><li><a href="#before-you-write">Before you write</a></li><li><a href="#response-times">Response times</a></li></ol></nav></details></aside>
 </div>
@@ -78,5 +82,34 @@
 </div>
 </div>
 </footer>
+<script>
+(function () {
+  function fit() {
+    var slots = document.querySelectorAll(".ad-slot[data-ad-fit]");
+    for (var i = 0; i < slots.length; i++) {
+      var slot = slots[i];
+      var body = slot.querySelector(".ad-body");
+      if (!body) continue;
+      var frame = body.querySelector("iframe");
+      body.style.height = "";
+      if (!frame) continue;
+      frame.style.transform = "";
+      var want = parseInt(slot.getAttribute("data-ad-fit"), 10);
+      var have = slot.clientWidth;
+      if (!want || !have || have >= want) continue;
+      var scale = have / want;
+      var tall = frame.offsetHeight || parseInt(frame.getAttribute("height"), 10) || 0;
+      body.style.height = Math.round(tall * scale) + "px";
+      frame.style.transformOrigin = "center top";
+      frame.style.transform = "scale(" + scale.toFixed(4) + ")";
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fit);
+  else fit();
+  window.addEventListener("load", fit);
+  var t;
+  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(fit, 150); });
+})();
+</script>
 </body>
 </html>

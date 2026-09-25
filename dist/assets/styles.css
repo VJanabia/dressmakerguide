@@ -190,6 +190,8 @@ figcaption{font-family:var(--sans);font-size:.83rem;color:var(--ink-3);margin-to
 /* --- motion / print ------------------------------------------------------- */
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 @media print{.site-head,.site-foot,.toc{display:none}body{font-size:11pt}}
+/* Print an article, not an ad. */
+@media print{.ad-slot{display:none!important}}
 
 /* --- article layout with an on-this-page rail ----------------------------- */
 .layout.has-toc{display:grid;gap:clamp(1.5rem,3vw,3rem);grid-template-columns:minmax(0,1fr)}
@@ -520,3 +522,24 @@ table{overflow-wrap:anywhere}
 /* Breadcrumb links are inline by nature; give them enough padding to clear the 24px minimum
    comfortably without turning one line of meta text into a stack of boxes. */
 .crumbs a,.crumbs span[aria-current]{min-height:28px;display:inline-flex;align-items:center;padding:.3rem .15rem}
+
+/* ============================================================================
+   Advertising - labelled slots that sit inside the article column
+   ========================================================================= */
+
+/* A slot reads as a deliberate unit: hairline above, a small uppercase label, then
+   the creative, centred. overflow:hidden means a creative wider than the column can
+   never widen the page - the fit script scales it to fit a moment later. */
+.ad-slot{display:flex;flex-direction:column;align-items:center;gap:.45rem;
+  margin:clamp(1.7rem,3.4vw,2.4rem) 0;padding-top:.9rem;border-top:1px solid var(--line-2);overflow:hidden}
+.ad-label{margin:0;font-family:var(--sans);font-size:var(--t-xs);font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ad-body{display:flex;justify-content:center;max-width:100%}
+/* A flex item shrinks by default. Without flex:0 0 auto the 468px frame is squeezed into the
+   column and the creative inside it is cut off at the right edge - the iframe gets a narrower
+   viewport, not a smaller picture. The frame keeps its own width here; fit() is what makes it fit. */
+.ad-body>iframe{flex:0 0 auto;border:0;background:transparent}
+/* The push unit is a container the network fills at runtime. It is the one slot that must not
+   clip: an in-page push card positions itself inside the container and may overhang it. */
+.ad-slot-push{overflow:visible}
+.ad-slot-push .ad-body{display:block;width:100%;min-height:0}

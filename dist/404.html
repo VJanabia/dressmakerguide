@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/assets/styles.css">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/fraunces.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter.woff2" crossorigin>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9073496682747119" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,6 +48,9 @@
 <ul><li><a href="/">Dressmaker game homepage</a> - what the game is, how it plays and what it costs</li><li><a href="/how-to-play">How to play Dressmaker</a> - the full walkthrough from first commission to finished dress</li><li><a href="/sewing-tips">Getting started and beginner tips</a> - the mistakes that cost you fabric and coin</li><li><a href="/customers">Customer preferences</a> - how to read a brief and keep your reputation intact</li><li><a href="/wiki">Dressmaker wiki</a> - fabric, pattern and accessory tables</li><li><a href="/demo">Demo download</a> - play the free itch.io prototype</li><li><a href="/release-date">Steam release date</a> - launch details, price and platforms</li><li><a href="/patch-notes">Patch notes</a> - what the developers changed and when</li></ul>
 <p>If a link on this site sent you here, please <a href="/contact">tell us about it</a> so we can fix it.</p>
 <aside class="callout note"><p class="callout-label">Note</p><p>Dressmaker Guide is an unofficial fan site and is not affiliated with the developers. The official pages are the <a href="https://store.steampowered.com/app/4019220/Dressmaker/" target="_blank" rel="noopener">Steam store page</a> and the <a href="https://elyaradine.itch.io/dressmaker" target="_blank" rel="noopener">itch.io prototype</a>.</p></aside>
+<aside class="ad-slot" data-ad-fit="468" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><script>atOptions = { "key" : "3bfd5956c4fad25498ca50e62ef7dcca", "format" : "iframe", "height" : 60, "width" : 468, "params" : {} };</script><script src="https://www.highrevenueformat.com/3bfd5956c4fad25498ca50e62ef7dcca/invoke.js"></script></div></aside>
+<aside class="ad-slot" data-ad-fit="320" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><script>atOptions = { "key" : "9f809a88800c18b0d09bd3c33ac1e2eb", "format" : "iframe", "height" : 50, "width" : 320, "params" : {} };</script><script src="https://www.highrevenueformat.com/9f809a88800c18b0d09bd3c33ac1e2eb/invoke.js"></script></div></aside>
+<aside class="ad-slot ad-slot-push" aria-label="Advertisement"><p class="ad-label">Advertisement</p><div class="ad-body"><div id="container-86858e1a8992e8258ee330ca2817c8c5"></div></div><script async data-cfasync="false" src="https://pl31505864.profitableratecpmnetwork.com/86858e1a8992e8258ee330ca2817c8c5/invoke.js"></script></aside>
 </article>
 </div>
 </div>
@@ -65,5 +69,34 @@
 </div>
 </div>
 </footer>
+<script>
+(function () {
+  function fit() {
+    var slots = document.querySelectorAll(".ad-slot[data-ad-fit]");
+    for (var i = 0; i < slots.length; i++) {
+      var slot = slots[i];
+      var body = slot.querySelector(".ad-body");
+      if (!body) continue;
+      var frame = body.querySelector("iframe");
+      body.style.height = "";
+      if (!frame) continue;
+      frame.style.transform = "";
+      var want = parseInt(slot.getAttribute("data-ad-fit"), 10);
+      var have = slot.clientWidth;
+      if (!want || !have || have >= want) continue;
+      var scale = have / want;
+      var tall = frame.offsetHeight || parseInt(frame.getAttribute("height"), 10) || 0;
+      body.style.height = Math.round(tall * scale) + "px";
+      frame.style.transformOrigin = "center top";
+      frame.style.transform = "scale(" + scale.toFixed(4) + ")";
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fit);
+  else fit();
+  window.addEventListener("load", fit);
+  var t;
+  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(fit, 150); });
+})();
+</script>
 </body>
 </html>

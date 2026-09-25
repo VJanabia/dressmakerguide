@@ -55,7 +55,7 @@ The homepage plus ten content pages, four compliance pages and a 404:
 ## Layout
 
 ```
-src/data/site.mjs        domain, official links, GA4 id, last-updated date
+src/data/site.mjs        domain, official links, GA4 id, AdSense client, ad unit ids, last-updated date
 src/data/images.mjs      image registry (official screenshots + alt text)
 src/lib/md.mjs           the small Markdown subset the content uses
 src/lib/layout.mjs       HTML shell: head, nav, breadcrumbs, footer, JSON-LD
@@ -70,6 +70,25 @@ docs/image-placement-brief.md  what each screenshot shows and where it belongs
 docs/design-system.md        fonts, colour tokens, page skeleton, house rules
 docs/audit-report.md     generated: per-page title/H1/word count/schema inventory
 ```
+
+## Advertising
+
+Every key lives in `ADS` in `src/data/site.mjs`; nothing is pasted into a page. Set
+`ADS.enabled: false` to build the whole site with no ad markup at all.
+
+- **AdSense** (`adsenseClient`): the snippet sits in `<head>` on every page, which is what
+  Google's site verification reads and what Auto Ads needs once the account is approved.
+  `public/ads.txt` carries the same publisher ID. No AdSense ad unit is placed yet - approval first.
+- **In-page push** (`ADS.inPagePush`): an empty container the network fills at runtime, at the foot
+  of every article.
+- **Banners** (`ADS.banners.wide` 468x60, `ADS.banners.narrow` 320x50): printed by
+  `src/lib/layout.mjs` after the first and the fourth H2 of every page. Each needs its own
+  `atOptions` block immediately before its `invoke.js`, because both scripts read the same
+  `window.atOptions`.
+
+Every slot is labelled "Advertisement" and sits inside the article column. The creatives have fixed
+pixel widths, so a small inline script scales a frame down to the column on a narrow phone: the whole
+creative stays visible and no page ever scrolls sideways. Ad slots are hidden in print.
 
 ## Adding a page
 
@@ -203,7 +222,11 @@ security headers. Netlify would need a `_redirects` line instead; Vercel would n
 - [ ] Google Search Console: add the domain property, verify by DNS TXT, submit `sitemap.xml`.
 - [ ] GSC → URL Inspection → Request Indexing for `/` and the four guide pages.
 - [ ] GA4: create the property, then set `ga4Id` in `src/data/site.mjs` and rebuild.
-- [ ] AdSense: apply once the site has been live and indexed for a few days; add `ads.txt` from the AdSense dashboard.
+- [ ] AdSense: the snippet and `ads.txt` are already in place (client `ca-pub-9073496682747119`).
+      Apply once the site has been live and indexed for a few days, then confirm the "Site"
+      verification passes; only after approval, place real AdSense ad units.
+- [ ] Open a page on a phone and confirm the three ad slots render inside the column: label above the
+      creative, no horizontal scroll, nothing clipped at the right edge.
 - [ ] Add a `/contact` email that actually receives mail (currently `hello@dressmakerguide.com`).
 - [ ] Re-check the Steam page for price and spec changes monthly; update `docs/dressmaker-facts.md` first.
 

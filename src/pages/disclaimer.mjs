@@ -32,7 +32,7 @@ const BODY = [
 "",
 "## Advertising and independence",
 "",
-"This site may display advertising, including through Google AdSense, to cover hosting costs. Advertising is served by third parties, is clearly advertising, and is never mixed into editorial content.",
+"This site may display advertising, including through Google AdSense and other ad networks, to cover hosting costs. Advertising is served by third parties, every ad slot is labelled as an advertisement, and advertising is never mixed into editorial content.",
 "",
 "- We do not accept payment for reviews, rankings or placement.",
 "- We do not run sponsored posts or paid links.",

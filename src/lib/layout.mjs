@@ -1,4 +1,4 @@
-import { SITE, LINKS } from '../data/site.mjs';
+import { SITE, LINKS, ADS } from '../data/site.mjs';
 import { renderMarkdown } from './md.mjs';
 
 const escAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -114,6 +114,112 @@ function sourcesHtml(sources) {
     '</ul></aside>';
 }
 
+
+
+/* --- advertising ------------------------------------------------------------
+   Three slots, all inside the article column so an ad is met where the reader is
+   already looking rather than parked in a rail nobody scrolls to:
+
+     slot 1  468x60  after the first section of the page
+     slot 2  320x50  two sections further down
+     slot 3  the in-page push container, at the foot of the article
+
+   Every slot carries a visible "Advertisement" label, so an ad can never be
+   mistaken for a screenshot, a callout or an editorial recommendation. The two
+   banner creatives are fixed pixel sizes chosen by the network, so the wide one
+   is scaled down on a narrow phone by AD_FIT_SCRIPT instead of overflowing the
+   column - the ad stays fully on screen and the page never scrolls sideways. */
+
+function adLabel() {
+  return '<p class="ad-label">Advertisement</p>';
+}
+
+/* A fixed-size iframe creative. atOptions must be set in its own inline script
+   immediately before the invoke.js it belongs to: both units read the same
+   window.atOptions, so a single shared block would feed the wrong key to one. */
+function bannerSlot(banner) {
+  if (!ADS.enabled || !banner) return '';
+  return '<aside class="ad-slot" data-ad-fit="' + banner.width + '" aria-label="Advertisement">' +
+    adLabel() +
+    '<div class="ad-body">' +
+    '<script>atOptions = { "key" : "' + banner.key + '", "format" : "iframe", "height" : ' + banner.height +
+    ', "width" : ' + banner.width + ', "params" : {} };</script>' +
+    '<script src="' + banner.src + '"></script>' +
+    '</div></aside>';
+}
+
+/* The in-page push unit: an empty container the network fills at runtime, plus
+   the one script that fills it. async, so it never holds up the article. */
+function inPagePushSlot() {
+  if (!ADS.enabled || !ADS.inPagePush) return '';
+  return '<aside class="ad-slot ad-slot-push" aria-label="Advertisement">' +
+    adLabel() +
+    '<div class="ad-body"><div id="' + ADS.inPagePush.containerId + '"></div></div>' +
+    '<script async data-cfasync="false" src="' + ADS.inPagePush.src + '"></script>' +
+    '</aside>';
+}
+
+/* Put a slot immediately before the nth H2, i.e. after the (n-1)th section. A page
+   with fewer sections than that gets the slot after its last one rather than no
+   ad at all, and a page with no H2 at all gets it after the first paragraph. */
+function insertBeforeHeading(html, slot, n) {
+  if (!slot) return html;
+  let idx = -1;
+  for (let i = 0; i < n; i++) {
+    idx = html.indexOf('<h2', idx + 1);
+    if (idx === -1) return html + '\n' + slot;
+  }
+  return html.slice(0, idx) + slot + '\n' + html.slice(idx);
+}
+
+/* The article body with the three slots in it. Rendering rather than hand-placing
+   them keeps every page - including pages added later - on the same rhythm. */
+function withAds(html) {
+  if (!ADS.enabled) return html;
+  let out = insertBeforeHeading(html, bannerSlot(ADS.banners.wide), 2);
+  out = insertBeforeHeading(out, bannerSlot(ADS.banners.narrow), 5);
+  return out + '\n' + inPagePushSlot();
+}
+
+/* The banner creatives are a fixed 468 and 320 pixels wide. Below that the slot
+   scales the frame to the column instead of hiding it: a hidden ad is an ad the
+   network counts as delivered but nobody sees, which is the one thing an ad slot
+   must never be. Re-runs on resize, and after load in case the network writes its
+   iframe late. */
+const AD_FIT_SCRIPT = ADS.enabled ? [
+  '<script>',
+  '(function () {',
+  '  function fit() {',
+  '    var slots = document.querySelectorAll(".ad-slot[data-ad-fit]");',
+  '    for (var i = 0; i < slots.length; i++) {',
+  '      var slot = slots[i];',
+  '      var body = slot.querySelector(".ad-body");',
+  '      if (!body) continue;',
+  '      var frame = body.querySelector("iframe");',
+  '      body.style.height = "";',
+  '      if (!frame) continue;',
+  '      frame.style.transform = "";',
+  '      var want = parseInt(slot.getAttribute("data-ad-fit"), 10);',
+  '      var have = slot.clientWidth;',
+  '      if (!want || !have || have >= want) continue;',
+  /* The FRAME is scaled, never the wrapper it sits in: scaling the wrapper would scale its own
+     height as well, so the creative would come out smaller than the box reserved for it and the
+     bottom of the banner would be cut off. The wrapper only reserves the scaled height. */
+  '      var scale = have / want;',
+  '      var tall = frame.offsetHeight || parseInt(frame.getAttribute("height"), 10) || 0;',
+  '      body.style.height = Math.round(tall * scale) + "px";',
+  '      frame.style.transformOrigin = "center top";',
+  '      frame.style.transform = "scale(" + scale.toFixed(4) + ")";',
+  '    }',
+  '  }',
+  '  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fit);',
+  '  else fit();',
+  '  window.addEventListener("load", fit);',
+  '  var t;',
+  '  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(fit, 150); });',
+  '})();',
+  '</script>',
+].join('\n') : '';
 
 /* The left rail. Every link is absolute and crawlable, so the sidebar doubles as the site's
    internal linking structure rather than being decorative. */
@@ -262,6 +368,10 @@ export function renderPage(page) {
     '<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter.woff2" crossorigin>',
     page.preload ? '<link rel="preload" as="image" href="' + escAttr(page.preload) + '" fetchpriority="high">' : '',
     SITE.ga4Id ? '<script async src="https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4Id + '"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","' + SITE.ga4Id + '");</script>' : '',
+    /* The AdSense snippet belongs in <head> - that is where Google's site verification looks for
+       it, and where Auto Ads expects it once the account is approved. Printed on every page, not
+       just the homepage, because a site is verified as a site and not as one URL. */
+    ADS.enabled && ADS.adsenseClient ? '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + escAttr(ADS.adsenseClient) + '" crossorigin="anonymous"></script>' : '',
     graph.length ? '<script type="application/ld+json">' + JSON.stringify(graph.length === 1 ? graph[0] : { '@context': 'https://schema.org', '@graph': graph }) + '</script>' : '',
     '</head>',
     '<body>',
@@ -281,7 +391,7 @@ export function renderPage(page) {
     page.facts && page.facts.length ? factsHtml(page.facts) : '',
     '<div class="layout' + (toc ? ' has-toc' : '') + '">',
     '<article class="prose">',
-    renderMarkdown(page.body),
+    withAds(renderMarkdown(page.body)),
     page.sources && page.sources.length ? sourcesHtml(page.sources) : '',
     '</article>',
     toc,
@@ -308,6 +418,7 @@ export function renderPage(page) {
     '</div>',
     '</div>',
     '</footer>',
+    AD_FIT_SCRIPT,
     '</body>',
     '</html>',
   ].filter(Boolean).join('\n');
