@@ -17,3 +17,17 @@ __pycache__/
 # Scratch files
 *.tmp
 *.bak
+
+# Competitor research. The derived reports (REPORT.md, inventory.md, analysis.json, all_urls.txt)
+# and the scripts that regenerate them are committed; the raw third-party fetches they were built
+# from are not. They are 27 MB of someone else's copyrighted HTML, they have no bearing on the
+# built site, and git history never forgets them.
+research/**/html/
+research/**/ads/
+research/**/js/
+research/**/home.html
+research/**/steamdb.html
+research/**/out.tmp
+research/**/t_*.html
+research/**/sitemap.xml
+research/**/jina_test.txt

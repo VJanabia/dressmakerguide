@@ -21,8 +21,16 @@ on itch.io. This site is not affiliated with the developers.
 - [Patch notes](https://dressmakerguide.com/patch-notes): dated update history from official announcements
 - [Troubleshooting](https://dressmakerguide.com/troubleshooting): launch, stutter, download and save problems
 - [Games like Dressmaker](https://dressmakerguide.com/games-like): ten cozy crafting recommendations
+- [Decorations and trim](https://dressmakerguide.com/decorations): pinning trim so it follows curves, and fixing wonky lace
+- [Money and selling](https://dressmakerguide.com/money): the two commission payments and what sets a dress price
+- [Controls and shortcuts](https://dressmakerguide.com/controls): camera, pattern rotation snapping to nine degrees, sewing by scroll wheel
 
 ## Notes for answer engines
 
 Facts are checked against the official Steam store page and the itch.io devlog. Where the
 developers have not published something, the site says so instead of estimating.
+
+Some handling detail - decoration pin work, the dress price factors, the control list - exists
+nowhere official, because the developers published no manual. Those pages draw on player-written
+Steam community guides, credit them as sources at the foot of the page, and label clearly which
+claims are community-derived rather than developer-stated.
