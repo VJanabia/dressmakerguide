@@ -20,8 +20,13 @@ const NAV_GROUPS = [
     ['/sewing-tips', 'Sewing tips'],
     ['/customers', 'Customers'],
   ]],
-  ['Reference', [
+  ['Making the dress', [
     ['/wiki', 'Wiki and tables'],
+    ['/decorations', 'Decorations and trim'],
+    ['/controls', 'Controls and shortcuts'],
+    ['/money', 'Money and selling'],
+  ]],
+  ['Reference', [
     ['/system-requirements', 'System requirements'],
     ['/troubleshooting', 'Troubleshooting'],
   ]],
@@ -52,6 +57,9 @@ const FOOT_COLS = [
     ['/sewing-tips', 'Dressmaker guide: sewing tips'],
     ['/customers', 'Dressmaker customer preferences'],
     ['/wiki', 'Dressmaker wiki'],
+    ['/decorations', 'Dressmaker decorations and trim'],
+    ['/money', 'Dressmaker money and selling'],
+    ['/controls', 'Dressmaker controls and shortcuts'],
   ]],
   ['Buy &amp; play', [
     ['/release-date', 'Dressmaker Steam release date'],

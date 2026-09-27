@@ -6,8 +6,9 @@ export const SITE = {
   tagline: 'A fan-made guide to the cozy dressmaking game',
   lang: 'en-US',
   locale: 'en_US',
-  // Set to true only after the real GA4 property exists, then run the build again.
-  ga4Id: '',
+  // GA4 measurement ID. When set, the Google tag is rendered into <head> on every page by
+  // src/lib/layout.mjs. Leave empty to build the site with no analytics at all.
+  ga4Id: 'G-BJJDJKS3CD',
   // Date of the last editorial pass over the whole site (ISO). Shown in the footer.
   contentUpdated: '2026-09-21',
 };
@@ -25,6 +26,12 @@ export const LINKS = {
   itchAugustTea: 'https://elyaradine.itch.io/dressmaker/devlog/1647471/august-tea-3-weeks-until-launch',
   itchJulyTea: 'https://elyaradine.itch.io/dressmaker/devlog/1607332/july-tea-and-launch-date-announcement',
   itchDownload: 'https://elyaradine.itch.io/dressmaker/purchase',
+  /* Community guides on Steam. These are player-written, not developer documentation, and are
+     credited as sources wherever the site draws on them. They are useful precisely because the
+     developers have published no manual: the handling detail below exists nowhere official. */
+  steamGuideTips: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3805958436',
+  steamGuideTrim: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3807402551',
+  steamGuideGuides: 'https://steamcommunity.com/app/4019220/guides/',
   screenhubReview: 'https://www.screenhub.com.au/news/reviews/dressmaker-pc-game-review-2707829/',
   guardian: 'https://www.theguardian.com/games/2026/aug/18/dressmaker-a-canvas-for-the-creativity-of-dream-dress-design',
 };

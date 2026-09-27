@@ -14,6 +14,16 @@ const dist = path.join(root, 'dist');
 
 /* src path -> the single approved alt text for that picture. */
 const { SHOTS } = await import('../src/data/images.mjs');
+const { SITE } = await import('../src/data/site.mjs');
+
+/* The Google tag is rendered from SITE.ga4Id by src/lib/layout.mjs. A wrong ID, a tag that fell
+   out of <head>, or a tag that vanished entirely all fail silently in the browser - the property
+   simply records nothing - so the build checks it instead. */
+if (SITE.ga4Id && !/^G-[A-Z0-9]{6,}$/.test(SITE.ga4Id)) {
+  problems.push('site.mjs: ga4Id "' + SITE.ga4Id + '" is not a G-XXXXXXXXXX measurement ID');
+}
+const GA_LOADER = 'https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4Id;
+const GA_CONFIG = 'gtag("config","' + SITE.ga4Id + '")';
 
 const REGISTRY_ALT = new Map(Object.values(SHOTS).map((s) => [s.src, s.alt]));
 const problems = [];
@@ -86,6 +96,19 @@ for (const file of files) {
   if (title.length > 60 && url !== '/404.html') problems.push(url + ': title is ' + title.length + ' chars (target <= 60)');
   if (desc.length > 155 && !AUDIT_EXEMPT.has(url)) notes.push(url + ': description is ' + desc.length + ' chars (target <= 155)');
   if (!canonical) problems.push(url + ': missing canonical');
+  /* Analytics: present on every page when an ID is configured, absent everywhere when it is not.
+     A half-deployed tag is worse than none - it hides which pages are actually being measured. */
+  if (SITE.ga4Id) {
+    const head = html.slice(0, html.indexOf('</head>'));
+    const loaders = head.split(GA_LOADER).length - 1;
+    if (loaders !== 1) problems.push(url + ': expected exactly 1 Google tag loader in <head>, found ' + loaders);
+    if (!head.includes(GA_CONFIG)) problems.push(url + ': Google tag is missing the config call for ' + SITE.ga4Id);
+    if (html.includes('googletagmanager.com/gtag/js?id=') && html.indexOf(GA_LOADER) > html.indexOf('</head>')) {
+      problems.push(url + ': Google tag is outside <head>');
+    }
+  } else if (html.includes('googletagmanager.com')) {
+    problems.push(url + ': renders a Google tag while SITE.ga4Id is empty');
+  }
   for (const img of imgs) {
     /* alt="" is correct for a decorative image - an icon sitting beside its own text label. A
        missing alt attribute is the real accessibility bug, so that is what this checks. */
